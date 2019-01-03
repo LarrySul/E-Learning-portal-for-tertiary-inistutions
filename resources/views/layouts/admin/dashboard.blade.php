@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Admin Dashboard') }}</title>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+
+    <link rel="stylesheet" href="{{ asset ('admin/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/owl.carousel.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/owl.theme.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/owl.transitions.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/animate.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/normalize.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/meanmenu.min.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/main.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/educate-custon-icon.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/morrisjs/morris.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/scrollbar/jquery.mCustomScrollbar.min.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/metisMenu/metisMenu.min.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/metisMenu/metisMenu-vertical.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/calendar/fullcalendar.print.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('admin/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/responsive.css')}}">
+
+</head>
+<body>
+    <div id="app">
+        <!-- <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links 
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
+            </div>
+        </nav> -->
+
+        <main>
+            @yield('content')
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    
+    <script src="{{ asset('admin/js/vendor/jquery-1.12.4.min.js') }}"></script>
+		
+    <script src="{{ asset('admin/js/bootstrap.min.js') }}"></script>
+
+    <script src="{{asset('admin/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+		
+    <script src="{{ asset('admin/js/wow.min.js') }}"></script>
+		
+    <script src="{{ asset('admin/js/jquery-price-slider.js') }}"></script>
+		
+    <script src="{{ asset('admin/js/jquery.meanmenu.js') }}"></script>
+		
+    <script src="{{ asset('admin/js/owl.carousel.min.js') }}"></script>
+		
+    <script src="{{ asset('admin/js/jquery.sticky.js') }}"></script>
+		
+    <script src="{{ asset('admin/js/jquery.scrollUp.min.js') }}"></script>
+		
+    <script src="{{ asset('admin/js/counterup/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('admin/js/counterup/waypoints.min.js') }}"></script>
+    <script src="{{ asset('admin/js/counterup/counterup-active.js') }}"></script>
+		
+    <script src="{{ asset('admin/js/scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ asset('admin/js/scrollbar/mCustomScrollbar-active.js') }}"></script>
+		
+    <script src="{{ asset('admin/js/metisMenu/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('admin/js/metisMenu/metisMenu-active.js') }}"></script>
+
+    <script src="{{ asset('admin/js/calendar/moment.min.js') }}"></script>
+    <script src="{{ asset('admin/js/calendar/fullcalendar-active.js') }}"></script>
+    <script src="{{ asset('admin/js/plugins.js') }}"></script>
+    <script src="{{ asset('admin/js/main.js') }}"></script>
+</body>
+</html>
