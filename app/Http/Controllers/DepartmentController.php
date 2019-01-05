@@ -17,7 +17,7 @@ class DepartmentController extends Controller
         return view('admin/department/all');
     }
 
-    public function departmentadd()
+    public function add()
     {
         return view('admin/department/add');
     }

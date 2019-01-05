@@ -33,3 +33,5 @@ Route::get('/addcourse', 'CourseController@add');
 Route::get('/courseinfo', 'CourseController@info');
 Route::get('/student', 'StudentController@index');
 Route::get('/addstudent', 'StudentController@addstudent');
+Route::get('/department', 'DepartmentController@index');
+Route::get('/departmentadd', 'DepartmentController@add');
