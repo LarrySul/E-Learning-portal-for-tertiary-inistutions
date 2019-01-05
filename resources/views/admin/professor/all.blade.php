@@ -44,7 +44,7 @@
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-pinterest"></i></a>
                             </div>
-                            <img alt="logo" class="img-circle m-b" src="img/contact/1.jpg">
+                            <img alt="logo" class="img-circle m-b" src="{{ asset ('admin/img/contact/3.jpg') }}">
                             <h3><a href="">Fox Well</a></h3>
                             <p class="all-pro-ad">California, LA</p>
                             <p>
@@ -54,13 +54,7 @@
                         <div class="panel-footer contact-footer">
                             <div class="professor-stds-int">
                                 <div class="professor-stds">
-                                    <div class="contact-stat"><span>Likes: </span> <strong>956</strong></div>
-                                </div>
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><span>Comments: </span> <strong>350</strong></div>
-                                </div>
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><span>Views: </span> <strong>450</strong></div>
+                                    <div class="contact-stat"><a href="/profile"> <span> View Lecturer's Profile </span> </a></div>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +68,7 @@
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-pinterest"></i></a>
                             </div>
-                            <img alt="logo" class="img-circle m-b" src="img/contact/3.jpg">
+                            <img alt="logo" class="img-circle m-b" src="{{ asset ('admin/img/contact/1.jpg') }}">
                             <h3><a href="">Drom Simson</a></h3>
                             <p class="all-pro-ad">Austrolia, LA</p>
                             <p>
@@ -84,13 +78,7 @@
                         <div class="panel-footer contact-footer">
                             <div class="professor-stds-int">
                                 <div class="professor-stds">
-                                    <div class="contact-stat"><span>Likes: </span> <strong>956</strong></div>
-                                </div>
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><span>Comments: </span> <strong>350</strong></div>
-                                </div>
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><span>Views: </span> <strong>450</strong></div>
+                                    <div class="contact-stat"><a href="/profile"> <span> View Lecturer's Profile </span> </a></div>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +92,7 @@
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-pinterest"></i></a>
                             </div>
-                            <img alt="logo" class="img-circle m-b" src="img/contact/2.jpg">
+                            <img alt="logo" class="img-circle m-b" src="{{ asset ('admin/img/contact/2.jpg') }}">
                             <h3><a href="">Sima son</a></h3>
                             <p class="all-pro-ad">Suiden, Cro</p>
                             <p>
@@ -114,13 +102,7 @@
                         <div class="panel-footer contact-footer">
                             <div class="professor-stds-int">
                                 <div class="professor-stds">
-                                    <div class="contact-stat"><span>Likes: </span> <strong>956</strong></div>
-                                </div>
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><span>Comments: </span> <strong>350</strong></div>
-                                </div>
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><span>Views: </span> <strong>450</strong></div>
+                                   <div class="contact-stat"><a href="/profile"> <span> View Lecturer's Profile </span> </a></div>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +116,7 @@
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-pinterest"></i></a>
                             </div>
-                            <img alt="logo" class="img-circle m-b" src="img/contact/4.jpg">
+                            <img alt="logo" class="img-circle m-b" src="{{ asset ('admin/img/contact/3.jpg') }}">
                             <h3><a href="">Drama Son</a></h3>
                             <p class="all-pro-ad">USA, LA</p>
                             <p>
@@ -144,13 +126,7 @@
                         <div class="panel-footer contact-footer">
                             <div class="professor-stds-int">
                                 <div class="professor-stds">
-                                    <div class="contact-stat"><span>Likes: </span> <strong>956</strong></div>
-                                </div>
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><span>Comments: </span> <strong>350</strong></div>
-                                </div>
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><span>Views: </span> <strong>450</strong></div>
+                                   <div class="contact-stat"><a href="/profile"> <span> View Lecturer's Profile </span> </a></div>
                                 </div>
                             </div>
                         </div>

@@ -16,8 +16,18 @@ Route::get('/home', function () {
 });
 
 Auth::routes();
-Route::get('/admin/index', 'AdminController@index');
+
 Route::get('/', 'UserController@index');
 Route::get('/course', 'UserController@course');
 Route::get('/blog', 'UserController@blog');
 Route::get('/registeration', 'UserController@register');
+
+
+// admin routes
+Route::get('/admin/index', 'AdminController@index');
+Route::get('/professor', 'LecturerController@index');
+Route::get('/addprofessor', 'LecturerController@addprofessor');
+Route::get('/profile', 'LecturerController@profile');
+Route::get('/course', 'CourseController@index');
+Route::get('/student', 'StudentController@index');
+Route::get('/addstudent', 'StudentController@addstudent');

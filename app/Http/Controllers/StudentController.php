@@ -14,7 +14,11 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin/student/all');
+    }
+
+    public function addstudent(){
+        return view('admin/student/add');
     }
 
     /**

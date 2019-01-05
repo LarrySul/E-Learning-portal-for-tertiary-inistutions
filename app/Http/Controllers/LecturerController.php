@@ -14,9 +14,18 @@ class LecturerController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin/professor/all');
     }
 
+    public function addprofessor()
+    {
+        return view('admin/professor/add');
+    }
+
+    public function profile()
+    {
+        return view('admin/professor/profile');
+    }
     /**
      * Show the form for creating a new resource.
      *

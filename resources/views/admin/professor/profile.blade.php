@@ -42,7 +42,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="profile-info-inner">
                         <div class="profile-img">
-                            <img src="img/profile/1.jpg" alt="" />
+                            <img src="{{asset('admin/img/profile/1.jpg')}}" alt="" />
                         </div>
                         <div class="profile-details-hr">
                             <div class="row">

@@ -21,15 +21,15 @@
                     <li>
                         <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Professors</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="All Professors" href="#"><span class="mini-sub-pro">All Professors</span></a></li>
-                            <li><a title="Add Professor" href="#"><span class="mini-sub-pro">Add Professor</span></a></li>
+                            <li><a title="All Professors" href="/professor"><span class="mini-sub-pro">All Professors</span></a></li>
+                            <li><a title="Add Professor" href="/addprofessor"><span class="mini-sub-pro">Add Professor</span></a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Students</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="All Students" href="#"><span class="mini-sub-pro">All Students</span></a></li>
-                            <li><a title="Add Students" href="#"><span class="mini-sub-pro">Add Student</span></a></li>
+                            <li><a title="All Students" href="/student"><span class="mini-sub-pro">All Students</span></a></li>
+                            <li><a title="Add Students" href="/addstudent"><span class="mini-sub-pro">Add Student</span></a></li>
                             </ul>
                     </li>
                     <li>

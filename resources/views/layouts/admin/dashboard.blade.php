@@ -24,14 +24,15 @@
     <link rel="stylesheet" href="{{ asset ('admin/css/normalize.css')}}">
     <link rel="stylesheet" href="{{ asset ('admin/css/meanmenu.min.css')}}">
     <link rel="stylesheet" href="{{ asset ('admin/css/main.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/dropzone/dropzone.css')}}">
     <link rel="stylesheet" href="{{ asset ('admin/css/educate-custon-icon.css')}}">
     <link rel="stylesheet" href="{{ asset ('admin/css/morrisjs/morris.css')}}">
     <link rel="stylesheet" href="{{ asset ('admin/css/scrollbar/jquery.mCustomScrollbar.min.css')}}">
     <link rel="stylesheet" href="{{ asset ('admin/css/metisMenu/metisMenu.min.css')}}">
     <link rel="stylesheet" href="{{ asset ('admin/css/metisMenu/metisMenu-vertical.css')}}">
-    <link rel="stylesheet" href="{{ asset ('admin/css/calendar/fullcalendar.print.min.css')}}">
     <link rel="stylesheet" href="{{ asset('admin/css/style.css')}}">
     <link rel="stylesheet" href="{{ asset ('admin/css/responsive.css')}}">
+    <link rel="stylesheet" href="{{ asset ('admin/css/form/all-type-forms.css')}}">
 
 </head>
 <body>
@@ -118,9 +119,8 @@
     <script src="{{ asset('admin/js/metisMenu/metisMenu.min.js') }}"></script>
     <script src="{{ asset('admin/js/metisMenu/metisMenu-active.js') }}"></script>
 
-    <script src="{{ asset('admin/js/calendar/moment.min.js') }}"></script>
-    <script src="{{ asset('admin/js/calendar/fullcalendar-active.js') }}"></script>
     <script src="{{ asset('admin/js/plugins.js') }}"></script>
     <script src="{{ asset('admin/js/main.js') }}"></script>
+    <script src="{{ asset('admin/js/dropzone/dropzone.js')}}"></script>
 </body>
 </html>
