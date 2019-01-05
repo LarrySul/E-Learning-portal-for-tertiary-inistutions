@@ -35,18 +35,16 @@
                     <li>
                         <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Courses</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="All Courses" href="#"><span class="mini-sub-pro">All Courses</span></a></li>
-                            <li><a title="Add Courses" href="#"><span class="mini-sub-pro">Add Course</span></a></li>
-                            <li><a title="Edit Courses" href="#"><span class="mini-sub-pro">Edit Course</span></a></li>
-                            <li><a title="Courses Profile" href="#"><span class="mini-sub-pro">Courses Info</span></a></li>
+                            <li><a title="All Courses" href="/course"><span class="mini-sub-pro">All Courses</span></a></li>
+                            <li><a title="Add Courses" href="/addcourse"><span class="mini-sub-pro">Add Course</span></a></li>
+                            <li><a title="Courses Profile" href="/courseinfo"><span class="mini-sub-pro">Courses Info</span></a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-department icon-wrap"></span> <span class="mini-click-non">Departments</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="Departments List" href="#"><span class="mini-sub-pro">Departments List</span></a></li>
-                            <li><a title="Add Departments" href="#"><span class="mini-sub-pro">Add Departments</span></a></li>
-                            <li><a title="Edit Departments" href="#"><span class="mini-sub-pro">Edit Departments</span></a></li>
+                            <li><a title="Departments List" href="/department"><span class="mini-sub-pro">Departments List</span></a></li>
+                            <li><a title="Add Departments" href="/departmentadd"><span class="mini-sub-pro">Add Departments</span></a></li>
                         </ul>
                     </li>
                     <li>

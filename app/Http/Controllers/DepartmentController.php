@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Course;
+use App\Department;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,19 +14,13 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('admin/course/all');
+        return view('admin/department/all');
     }
 
-    public function add()
+    public function departmentadd()
     {
-        return view('admin/course/add');
+        return view('admin/department/add');
     }
-
-    public function info()
-    {
-        return view('admin/course/info');
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -51,10 +45,10 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Course  $course
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course)
+    public function show(Department $department)
     {
         //
     }
@@ -62,10 +56,10 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Course  $course
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit(Department $department)
     {
         //
     }
@@ -74,10 +68,10 @@ class CourseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Course  $course
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, Department $department)
     {
         //
     }
@@ -85,10 +79,10 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Course  $course
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy(Department $department)
     {
         //
     }

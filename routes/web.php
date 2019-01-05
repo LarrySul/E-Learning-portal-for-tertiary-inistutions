@@ -29,5 +29,7 @@ Route::get('/professor', 'LecturerController@index');
 Route::get('/addprofessor', 'LecturerController@addprofessor');
 Route::get('/profile', 'LecturerController@profile');
 Route::get('/course', 'CourseController@index');
+Route::get('/addcourse', 'CourseController@add');
+Route::get('/courseinfo', 'CourseController@info');
 Route::get('/student', 'StudentController@index');
 Route::get('/addstudent', 'StudentController@addstudent');
