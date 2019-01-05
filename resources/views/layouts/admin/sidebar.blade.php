@@ -47,14 +47,6 @@
                             <li><a title="Add Departments" href="/departmentadd"><span class="mini-sub-pro">Add Departments</span></a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Mailbox</span></a>
-                        <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="Inbox" href="#"><span class="mini-sub-pro">Inbox</span></a></li>
-                            <li><a title="View Mail" href="#"><span class="mini-sub-pro">View Mail</span></a></li>
-                            <li><a title="Compose Mail" href="#"><span class="mini-sub-pro">Compose Mail</span></a></li>
-                        </ul>
-                    </li>
                 </ul>
             </nav>
         </div>
