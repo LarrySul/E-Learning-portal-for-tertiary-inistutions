@@ -1,5 +1,4 @@
-@extends('layouts.admin.app')
-
+@extends('layouts.admin.dashboard')
 @section('content')
 <div class="error-pagewrap">
     <div class="error-page-int">

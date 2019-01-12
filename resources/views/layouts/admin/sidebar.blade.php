@@ -35,7 +35,7 @@
                     <li>
                         <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Courses</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="All Courses" href="/course"><span class="mini-sub-pro">All Courses</span></a></li>
+                            <li><a title="All Courses" href="/admincourse"><span class="mini-sub-pro">All Courses</span></a></li>
                             <li><a title="Add Courses" href="/addcourse"><span class="mini-sub-pro">Add Course</span></a></li>
                             <li><a title="Courses Profile" href="/courseinfo"><span class="mini-sub-pro">Courses Info</span></a></li>
                         </ul>
