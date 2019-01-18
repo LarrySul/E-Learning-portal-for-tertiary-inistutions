@@ -36,102 +36,32 @@
     <div class="contacts-area mg-b-15">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel hblue contact-panel contact-panel-cs mg-t-30">
-                        <div class="panel-body custom-panel-jw">
-                            <div class="social-media-in">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                @foreach ($lecturers as $key => $data)
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel hblue contact-panel contact-panel-cs mg-t-30">
+                            <div class="panel-body custom-panel-jw">
+                                <div class="social-media-in">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </div>
+                                <img alt="logo" class="img-circle m-b" src="admin/upload/lecturer/{{$data->img}}">
+                                <h3><a href="">{{ $data->fullname }}</a></h3>
+                                <p class="all-pro-ad">{{$data->address}}</p>
+                                <p>
+                                    {{$data->description}}
+                                </p>
                             </div>
-                            <img alt="logo" class="img-circle m-b" src="{{ asset ('admin/img/contact/3.jpg') }}">
-                            <h3><a href="">Fox Well</a></h3>
-                            <p class="all-pro-ad">California, LA</p>
-                            <p>
-                                Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt est vitae ultrices accumsan.
-                            </p>
-                        </div>
-                        <div class="panel-footer contact-footer">
-                            <div class="professor-stds-int">
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><a href="/profile"> <span> View Lecturer's Profile </span> </a></div>
+                            <div class="panel-footer contact-footer">
+                                <div class="professor-stds-int">
+                                    <div class="professor-stds">
+                                        <div class="contact-stat"><a href="/profile&{{$data->id}}"> <span> View Lecturer's Profile </span> </a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel hblue contact-panel contact-panel-cs mg-t-30">
-                        <div class="panel-body custom-panel-jw">
-                            <div class="social-media-in">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                            <img alt="logo" class="img-circle m-b" src="{{ asset ('admin/img/contact/1.jpg') }}">
-                            <h3><a href="">Drom Simson</a></h3>
-                            <p class="all-pro-ad">Austrolia, LA</p>
-                            <p>
-                                Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt est vitae ultrices accumsan.
-                            </p>
-                        </div>
-                        <div class="panel-footer contact-footer">
-                            <div class="professor-stds-int">
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><a href="/profile"> <span> View Lecturer's Profile </span> </a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel hblue contact-panel contact-panel-cs mg-t-30">
-                        <div class="panel-body custom-panel-jw">
-                            <div class="social-media-in">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                            <img alt="logo" class="img-circle m-b" src="{{ asset ('admin/img/contact/2.jpg') }}">
-                            <h3><a href="">Sima son</a></h3>
-                            <p class="all-pro-ad">Suiden, Cro</p>
-                            <p>
-                                Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt est vitae ultrices accumsan.
-                            </p>
-                        </div>
-                        <div class="panel-footer contact-footer">
-                            <div class="professor-stds-int">
-                                <div class="professor-stds">
-                                   <div class="contact-stat"><a href="/profile"> <span> View Lecturer's Profile </span> </a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel hblue contact-panel contact-panel-cs mg-t-30">
-                        <div class="panel-body custom-panel-jw">
-                            <div class="social-media-in">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                            <img alt="logo" class="img-circle m-b" src="{{ asset ('admin/img/contact/3.jpg') }}">
-                            <h3><a href="">Drama Son</a></h3>
-                            <p class="all-pro-ad">USA, LA</p>
-                            <p>
-                                Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt est vitae ultrices accumsan.
-                            </p>
-                        </div>
-                        <div class="panel-footer contact-footer">
-                            <div class="professor-stds-int">
-                                <div class="professor-stds">
-                                   <div class="contact-stat"><a href="/profile"> <span> View Lecturer's Profile </span> </a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div> 

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+// use Auth;
+use Image;
 
 class AdminController extends Controller
 {
@@ -15,6 +18,28 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin/welcome');
+    }
+
+    public function home(){
+        if (Auth::check()) {
+            return view('admin/home');
+        }else {
+            return redirect('/admin/index');
+        }
+    }
+
+    public function update_avatar(Request $request){
+        // handle the user upload of avatar
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() .'.'. $avatar ->getClientOriginalExtension();
+            Image::make($avatar)->resize(200, 200)->save(public_path('admin/upload/avatar/'. $filename));
+
+            $user = Auth::user();
+            $user->avatar = $filename;
+            $user->save();
+        }
+        return view('admin/home', array('user' => Auth::user()));
     }
 
     /**

@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/owl.carousel.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/owl.theme.default.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/modals.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main_styles.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/blog.css') }}">

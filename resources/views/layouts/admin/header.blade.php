@@ -53,12 +53,12 @@
                                                 @else
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                        <img src="admin/img/product/pro4.jpg" alt="" />
+                                                        <img src="admin/upload/avatar/{{Auth::user()->avatar}}" alt="" />
                                                         <span class="admin-name">{{ Auth::user()->name }}</span>
                                                         <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                     </a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>Update Profile</a></li>      
+                                                        <li><a href="#" data-toggle="modal" data-target="#PrimaryModalalert"><span class="edu-icon edu-home-admin author-log-ic"></span>Update Profile</a></li>      
                                                         <li>
                                                             <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><span class="edu-icon edu-home-admin author-log-ic"></span>{{ __('Logout') }}
                                                             </a>
@@ -131,6 +131,32 @@
             </div>
         </div>
     </div>
+
+    <!-- modal form -->
+    <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-close-area modal-close-df">
+                    <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/upload" enctype="multipart/form-data" >
+                    @csrf
+                        <div class="form-group">
+                            <label for="image">Upload avatar</label>
+                            <input type="file" class="form-control" name="avatar">
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-danger"> Cancel</button>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </div>
+                    </form>  
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal -->
 </div>
 
 

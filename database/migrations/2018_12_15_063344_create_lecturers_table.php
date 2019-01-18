@@ -14,14 +14,12 @@ class CreateLecturersTable extends Migration
     public function up()
     {
         Schema::create('lecturers', function (Blueprint $table) {
-            $table->increments('lect_id');
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->increments('id');
+            $table->string('fullname');
             $table->text('address');
-            $table->string('phone')->unique();
+            $table->string('mobileno')->unique();
             $table->date('dob');
             $table->string('img');
-            $table->unsignedInteger('course_id');
             $table->string('department');
             $table->text('description');
             $table->string('gender');

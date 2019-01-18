@@ -4,69 +4,79 @@ namespace App\Http\Controllers;
 
 use App\Lecturer;
 use Illuminate\Http\Request;
+use Auth\Validator;
+use Auth;
+use Image;
+use Session;
 
 class LecturerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        return view('admin/professor/all');
+        if (Auth::check()) {
+            $lecturers = Lecturer::all();
+		    return view('admin.professor.all', compact('lecturers'));
+        }else {
+            return redirect('/admin/index');
+        }
     }
 
-    public function addprofessor()
+
+    public function create()
     {
         return view('admin/professor/add');
     }
 
-    public function profile()
-    {
-        return view('admin/professor/profile');
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'fullname' => 'required |string',
+            'address' => 'required |string',
+            'mobileno' => 'required|numeric| unique:lecturers',
+            'dob' => 'required | date',
+            'department' => 'required |string',
+            'description' => 'required |string| max:255',
+            'img' => 'required|image',
+            'gender' => 'required |string',
+            'country'=> 'required |string',
+            'state' => 'required |string',
+        ]);
+        
+        $lecturer = $request ->file('img');
+        $filename = $lecturer->getClientOriginalName();
+        Image::make($lecturer)->resize(200, 200)->save(public_path('admin/upload/lecturer/'. $filename));
+        
+
+        $lecturer = new Lecturer();
+        $lecturer -> fullname = $request -> fullname;
+        $lecturer -> address = $request -> address;
+        $lecturer -> mobileno = $request -> mobileno;
+        $lecturer -> dob = $request -> dob;
+        $lecturer -> department = $request -> department;
+        $lecturer -> description = $request -> description;
+        $lecturer -> img = $filename;
+        $lecturer -> gender = $request -> gender;
+        $lecturer -> country = $request -> country;
+        $lecturer -> state = $request -> state;
+
+        $lecturer ->save();
+        Session::flash('flash_message', 'Lecturer successfully added!');
+        return redirect('/home');
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Lecturer  $lecturer
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(Lecturer $lecturer)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Lecturer  $lecturer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Lecturer $lecturer)
+    public function edit(Lecturer $lecturer, $id)
     {
-        //
+        $lecturers = Lecturer::find($id);
+        return view('admin/professor/profile', ['lecturer' => $lecturers]);
     }
 
     /**
