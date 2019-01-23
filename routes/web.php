@@ -32,9 +32,6 @@ Route::get('/courseinfo&{id}', 'CourseController@edit');
 Route::get('/student', 'StudentController@index');
 Route::get('/addstudent', 'StudentController@addstudent');
 Route::get('/department', 'DepartmentController@show');
-
-
-// admin post routes
 Route::post('/upload', 'AdminController@update_avatar');
 Route::post('/addprofessor', 'LecturerController@store');
 Route::post('/addcourse', 'CourseController@store');
