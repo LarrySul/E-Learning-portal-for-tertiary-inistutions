@@ -13,7 +13,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="breadcome-heading">
                                         <form role="search" class="sr-input-func">
-                                            <input type="text" placeholder="Search..." class="search-int form-control">
+                                            <input type="text" required placeholder="Search..." class="search-int form-control">
                                             <a href="#"><i class="fa fa-search"></i></a>
                                         </form>
                                     </div>
@@ -40,119 +40,92 @@
                     <div class="product-payment-inner-st">
                         <ul id="myTabedu1" class="tab-review-design">
                             <li class="active"><a href="#description">Courses Details</a></li>
-                            <li><a href="#reviews"> Acount Information</a></li>
-                            <li><a href="#INFORMATION">Social Information</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content custom-product-edit">
                             <div class="product-tab-list tab-pane fade active in" id="description">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        @if(Session::has('flash_message'))
+                                            <div class="alert alert-success alert-dismissible col-md-3 pull-right" role="alert" >
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                {{ Session::get('flash_message') }}
+                                            </div>
+                                        @endif
                                         <div class="review-content-section">
                                             <div id="dropzone1" class="pro-ad addcoursepro">
-                                                <form action="/upload" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload">
-                                                    <div class="row">
+                                                <form action="/addcourse" method="POST" class="dropzone dropzone-custom needsclick addcourse">
+                                                @csrf
+                                                    <div class="row"> 
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <input name="coursename" type="text" class="form-control" placeholder="Course Name">
+                                                                <input name="csname" type="text" class="form-control" required placeholder="Course Name">
+                                                                
                                                             </div>
                                                             <div class="form-group">
-                                                                <input name="finish" id="finish" type="text" class="form-control" placeholder="Course Start Date">
+                                                                <input name="cscode" type="text" class="form-control" required placeholder="Course code">
                                                             </div>
                                                             <div class="form-group">
-                                                                <input name="duration" type="text" class="form-control" placeholder="Course Duration">
+                                                                <select name="status" class="form-control">
+                                                                    <option value="">- Select Course Status-</option>
+                                                                    <option value="Available">Available</option>
+                                                                    <option value="Not available">Not available</option>
+                                                                </select>
                                                             </div>
                                                             <div class="form-group">
-                                                                <input name="price" type="number" class="form-control" placeholder="Course Price">
+                                                                <select name="deptid" class="form-control">
+                                                                    <option value="" >- Select Department-</option>
+                                                                    <option value="1">Mathematics</option>
+                                                                    <option value="2">Computer Science</option>
+                                                                    <option value="3">Physics</option>
+                                                                    <option value="4">Chemistry</option>
+                                                                    <option value="5">Biology</option>
+                                                                    <option value="6">Agricultural Science</option>
+                                                                </select>
                                                             </div>
-                                                            <div class="form-group alert-up-pd">
-                                                                <div class="dz-message needsclick download-custom">
-                                                                    <i class="fa fa-download edudropnone" aria-hidden="true"></i>
-                                                                    <h2 class="edudropnone">Drop image here or click to upload.</h2>
-                                                                    <p class="edudropnone"><span class="note needsclick">(This is just a demo dropzone. Selected image is <strong>not</strong> actually uploaded.)</span>
-                                                                    </p>
-                                                                    <input name="imageico" class="hd-pro-img" type="text" />
-                                                                </div>
+                                                            <div class="form-group">
+                                                                <select name="level" class="form-control">
+                                                                    <option value="">-Select Level-</option>
+                                                                    <option value="100">100L</option>
+                                                                    <option value="200">200L</option>
+                                                                    <option value="300">300L</option>
+                                                                    <option value="400">400L</option>
+                                                                    <option value="500">500L</option>
+                                                                    <option value="Extra year">Extra Year</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <select name="lectid" class="form-control">
+                                                                    <option value="">- Select Lecturer -</option>
+                                                                    <option value="1">Mr Adenubi</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group res-mg-t-15">
-                                                                <input name="department" type="text" class="form-control" placeholder="Department">
+                                                            <div class="form-group">
+                                                                <textarea name="description" required placeholder="Description"></textarea>
                                                             </div>
                                                             <div class="form-group">
-                                                                <textarea name="description" placeholder="Description"></textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input name="crprofessor" type="text" class="form-control" placeholder="Professor">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input id="year" name="year" type="text" class="form-control" placeholder="Year">
+                                                                <input name="url" type="url" class="form-control" required placeholder="Url of course">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="payment-adress">
-                                                                <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
-                                                            </div>
+                                                        <div class="col-lg-12 text-center">
+                                                            <button type="submit" class="btn btn-primary">Submit</button>
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="product-tab-list tab-pane fade" id="reviews">
-                                <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="review-content-section">
-                                            <div class="row">
-                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                    <div class="devit-card-custom">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Email">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="number" class="form-control" placeholder="Phone">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="password" class="form-control" placeholder="Password">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="password" class="form-control" placeholder="Confirm Password">
-                                                        </div>
-                                                        <a href="#" class="btn btn-primary waves-effect waves-light">Submit</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-tab-list tab-pane fade" id="INFORMATION">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="review-content-section">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="devit-card-custom">
-                                                        <div class="form-group">
-                                                            <input type="url" class="form-control" placeholder="Facebook URL">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="url" class="form-control" placeholder="Twitter URL">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="url" class="form-control" placeholder="Google Plus">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="url" class="form-control" placeholder="Linkedin URL">
-                                                        </div>
-                                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @if(count($errors)>0)
+                                            <ul>
+                                                @foreach($errors->all() as $error)
+                                                <li class="alert close " data-dismiss="alert" aria-label="Close" style="color:#D80027;list-style: none">{{$error}}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

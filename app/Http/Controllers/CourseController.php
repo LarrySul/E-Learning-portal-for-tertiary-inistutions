@@ -4,70 +4,70 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use Illuminate\Http\Request;
+use Auth\Validator;
+use Auth;
+use Session;
 
 class CourseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('admin/course/all');
-    }
-
-    public function add()
-    {
-        return view('admin/course/add');
-    }
-
-    public function info()
-    {
-        return view('admin/course/info');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
-    {
-        //
+    {   
+        if (Auth::check()) {
+            return view('admin.course.add');
+        }else{
+            return redirect('admin/index');
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
-    {
-        //
+    {   
+        if (Auth::check()) {
+            $this->validate($request, [ 
+                'csname' => 'required| string',
+                'cscode' => 'required | string',
+                'status' => 'required| string',
+                'description' => 'required| string',
+                'level' => 'required| string',
+                'deptid' => 'required| numeric',
+                'lectid'=> 'required| numeric',
+                'url'=> 'required| string'
+            ]);
+
+            $course = Course::create([
+                'csname' => $request['csname'],
+                'cscode' => $request['cscode'],
+                'status' => $request['status'],
+                'description' => $request['description'],
+                'level' => $request['level'],
+                'deptid' => $request['deptid'],
+                'lectid' => $request['lectid'],
+                'url' => $request['url']
+            ]);
+            Session::flash('flash_message', 'Successfully registered course');
+            return redirect('/admincourse');
+        }else{
+            return redirect('admin/index');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Course  $course
-     * @return \Illuminate\Http\Response
-     */
     public function show(Course $course)
-    {
-        //
+    {   
+        if (Auth::check()) {
+            $course = Course::all();
+            return view('admin.course.all', ['course' => $course]);
+        }else{
+            return redirect('admin/index');
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Course $course)
-    {
-        //
+    public function edit(Course $course, $id)
+    {   
+        if (Auth::check()) {
+            $course = Course::find($id);
+            return view('admin/course/info',['course' => $course]);
+        }else{
+            return redirect('admin/index');
+        }
     }
 
     /**

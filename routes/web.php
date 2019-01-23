@@ -26,16 +26,18 @@ Route::get('/admin/index', 'AdminController@index');
 Route::get('/professor', 'LecturerController@index');
 Route::get('/addprofessor', 'LecturerController@create');
 Route::get('/profile&{id}', 'LecturerController@edit');
-Route::get('/admincourse', 'CourseController@index');
-Route::get('/addcourse', 'CourseController@add');
-Route::get('/courseinfo', 'CourseController@info');
+Route::get('/admincourse', 'CourseController@show');
+Route::get('/addcourse', 'CourseController@create');
+Route::get('/courseinfo&{id}', 'CourseController@edit');
 Route::get('/student', 'StudentController@index');
 Route::get('/addstudent', 'StudentController@addstudent');
-Route::get('/department', 'DepartmentController@index');
-Route::get('/departmentadd', 'DepartmentController@add');
+Route::get('/department', 'DepartmentController@show');
 
 
 // admin post routes
 Route::post('/upload', 'AdminController@update_avatar');
 Route::post('/addprofessor', 'LecturerController@store');
+Route::post('/addcourse', 'CourseController@store');
+Route::post('/department', 'DepartmentController@store');
+Route::delete('/delete', 'DepartmentController@destroy');
 

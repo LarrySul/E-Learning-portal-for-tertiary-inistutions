@@ -14,15 +14,15 @@ class CreateCoursesTable extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->increments('course_id');
+            $table->increments('id');
             $table->string('csname')->unique();
-            $table->date('csdate');
-            $table->string('csduration');
-            $table->string('csprice');
+            $table->string('cscode')->unique();
+            $table->string('status');
             $table->string('description');
             $table->string('level');
             $table->unsignedInteger('deptid');
             $table->unsignedInteger('lectid');
+            $table->string('url');
             $table->timestamps();
         });
     }

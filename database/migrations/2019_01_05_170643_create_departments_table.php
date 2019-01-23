@@ -14,11 +14,11 @@ class CreateDepartmentsTable extends Migration
     public function up()
     {
         Schema::create('departments', function (Blueprint $table) {
-            $table->increments('id'); 
+            $table->increments('deptid'); 
             $table->string('deptname'); 
             $table->string('hod'); 
             $table->string('email')->unique(); 
-            $table->string('phone');
+            $table->string('no_courses');
             $table->string('status');
             $table->string('no_students'); 
             $table->timestamps();

@@ -36,11 +36,32 @@
     <div class="product-status mg-b-15">
         <div class="container-fluid">
             <div class="row">
+                @if(count($errors)>0)
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li class="alert alert-danger close" data-dismiss="alert" aria-label="Close" style="list-style: none;">{{$error}}</li>
+                        @endforeach
+                    </ul>
+                @endif
+
+                @if(session()->has('notify'))
+                    <div class="alert alert-success alert-dismissible col-md-3 pull-right" role="alert" >
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ session()->get('notify') }}
+                    </div>
+                @endif
+
+                @if(session()->has('delete'))
+                    <div class="alert alert-danger alert-dismissible col-md-3 pull-right" role="alert" >
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ session()->get('delete') }}
+                    </div>
+                @endif
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap drp-lst">
                         <h4>Departments List</h4>
                         <div class="add-product">
-                            <a href="/departmentadd">Add Departments</a>
+                            <a href="#" data-toggle="modal" data-target="#PrimaryModalhdbgcl">Add Departments</a>
                         </div>
                         <div class="asset-inner">
                             <table>
@@ -50,100 +71,27 @@
                                     <th>Status</th>
                                     <th>Head</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
+                                    <th>Registered courses</th>
                                     <th>No. of Students</th>
                                     <th>Setting</th>
                                 </tr>
+                                @foreach($department as $key => $data)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Computer</td>
+                                    <td>{{$key + 1}}</td>
+                                    <td>{{$data->deptname}}</td>
                                     <td>
-                                        <button class="pd-setting">Active</button>
+                                        <button class="pd-setting">{{$data->status}}</button>
                                     </td>
-                                    <td>John Alva</td>
-                                    <td>admin@gmail.com</td>
-                                    <td>01962067309</td>
-                                    <td>1500</td>
+                                    <td>{{$data->hod}}</td>
+                                    <td>{{$data->email}}</td>
+                                    <td>{{$data->no_courses}}</td>
+                                    <td>{{$data->no_students}}</td>
                                     <td>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    <a data-toggle="modal" data-target="#Modal2_{{$data->deptid}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                    <a data-toggle="modal" data-target="#Modal3_{{$data->deptid}}"><button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Mechanical</td>
-                                    <td>
-                                        <button class="ps-setting">Paused</button>
-                                    </td>
-                                    <td>John Alva</td>
-                                    <td>admin@gmail.com</td>
-                                    <td>01962067309</td>
-                                    <td>1700</td>
-                                    <td>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>MBA</td>
-                                    <td>
-                                        <button class="ds-setting">Disabled</button>
-                                    </td>
-                                    <td>John Alva</td>
-                                    <td>admin@gmail.com</td>
-                                    <td>01962067309</td>
-                                    <td>1500</td>
-                                    <td>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>BBA</td>
-                                    <td>
-                                        <button class="pd-setting">Active</button>
-                                    </td>
-                                    <td>John Alva</td>
-                                    <td>admin@gmail.com</td>
-                                    <td>01962067309</td>
-                                    <td>1200</td>
-                                    <td>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>CSE</td>
-                                    <td>
-                                        <button class="pd-setting">Active</button>
-                                    </td>
-                                    <td>John Alva</td>
-                                    <td>admin@gmail.com</td>
-                                    <td>01962067309</td>
-                                    <td>1800</td>
-                                    <td>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>MBA</td>
-                                    <td>
-                                        <button class="ps-setting">Paused</button>
-                                    </td>
-                                    <td>John Alva</td>
-                                    <td>admin@gmail.com</td>
-                                    <td>01962067309</td>
-                                    <td>1000</td>
-                                    <td>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </table>
                         </div>
                         <div class="custom-pagination">
@@ -151,13 +99,140 @@
                                 <ul class="pagination">
                                     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
                                     <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
                                     <li class="page-item"><a class="page-link" href="#">Next</a></li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
+                    <div id="PrimaryModalhdbgcl" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header header-color-modal bg-color-1">
+                                    <h4 class="modal-title">Add Department</h4>
+                                    <div class="modal-close-area modal-close-df">
+                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form  action="/department" method="POST">
+                                        <div class="row">
+                                        @csrf
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <input name="deptname" type="text" class="form-control" placeholder="Department Name" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="hod" type="text" class="form-control" placeholder="Head of Department" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="email" type="email" class="form-control" placeholder="Email" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <input name="no_courses" type="number" class="form-control" placeholder="Course offered" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="no_students" type="number" class="form-control" placeholder="No. of Students" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select name="status" class="form-control" required>
+                                                    <option value>-Select Status-</option>
+                                                        <option value="Inactive">Inactive</option>
+                                                        <option value="Active">Active</option>
+                                                    </select> 
+                                                </div>
+                                            </div>
+                                        </div>   
+                                        <div class="modal-footer">
+                                            <button data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Register</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- i need to condition this place if records arent inserted -->
+                    <div id="Modal2_{{$data->deptid}}" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header header-color-modal bg-color-1">
+                                    <h4 class="modal-title">Edit Department</h4>
+                                    <div class="modal-close-area modal-close-df">
+                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form  action="#" method="POST">
+                                    @csrf
+                                    <div class="row">
+                                        @csrf
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <input name="deptname" type="text" class="form-control" value="{{$data->deptname}}" placeholder="Department Name" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="hod" type="text" class="form-control" value="{{$data->hod}}" placeholder="Head of Department" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="email" type="email" class="form-control" value="{{$data->email}}" placeholder="Email" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <input name="no_courses" type="number" class="form-control" value="{{$data->no_courses}}" placeholder="Course offered" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="no_students" type="number" class="form-control" value="{{$data->no_students}}" placeholder="No. of Students" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select name="status" class="form-control">
+                                                        <option value="{{$data->status}}">{{$data->status}}</option>
+                                                        <option value="Inactive">Inactive</option>
+                                                        <option value="Active">Active</option>
+                                                    </select> 
+                                                </div>
+                                            </div>
+                                        </div>   
+                                        <div class="modal-footer">
+                                            <button data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- and also -->
+                    <div id="Modal3_{{$data->deptid}}" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-close-area modal-close-df">
+                                    <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                </div>
+                                <form action="/delete" method="POST">
+                                    <div class="modal-body">
+                                    
+                                        <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+                                        <h2>Danger!</h2>
+                                        {{method_field('delete')}}
+                                        @csrf
+                                        <input type="hidden" name="deptid" value="{{$data->deptid}}">
+                                        <p>You are about to delete this record...</p>
+                                    </div>
+                                    <div class="modal-footer danger-md">
+                                        <button type="button" class="btn btn-md btn-danger" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-md btn-danger">Confirm Delete</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    
                 </div>
             </div>
         </div>

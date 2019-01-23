@@ -36,27 +36,24 @@
     <div class="courses-area">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="courses-inner res-mg-b-30">
-                        <div class="courses-title">
-                            <a href="#"><img src="{{asset('admin/img/courses/1.jpg')}}" alt=""></a>
-                            <h2>Apps Development</h2>
-                        </div>
-                        <div class="courses-alaltic">
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                        </div>
-                        <div class="course-des">
-                            <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                        </div>
-                        <div class="product-buttons">
-                            <button type="button" class="button-default cart-btn">Read More</button>
+                @foreach ($course as $key => $data)
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="courses-inner res-mg-b-30">
+                            <div class="courses-title">
+                                <a href="#"><img src="{{asset('admin/img/courses/1.jpg')}}" alt=""></a>
+                                <h2 class="text-center">{{$data->csname}}</h2>
+                            </div>
+                            <div class="course-des">
+                                <p><span><i class="fa fa-clock"></i></span> <b>Status:</b>&nbsp; {{$data->status}}</p>
+                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b>&nbsp; {{$data ->lectid}}</p>
+                                <p><span><i class="fa fa-clock"></i></span> <b>Students Enrolled:</b>&nbsp;  100+</p>
+                            </div>
+                            <div class="product-buttons">
+                            <a href="/courseinfo&{{$data->id}}"> <button type="button" class="button-default cart-btn"> Read More </button></a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
