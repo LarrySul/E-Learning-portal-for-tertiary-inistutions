@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Department;
+use App\Http\Requests\CourseRequest;
 use Illuminate\Http\Request;
 use Auth\Validator;
 use Auth;
@@ -10,41 +10,29 @@ use Session;
 
 class DepartmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function create()
     {
-        if(Auth::check()){
-          return view('admin/department/all');  
-        }else{
-            return redirect('admin/index');
-        }   
+        return view('admin/department/all');  
     }
 
-    public function store(Request $request)
+    public function store(DepartmentRequest $request)
     {
-        if(Auth::check()){
-            $this->validate($request, [
-                'deptname'=>'required|numeric|max:2',
-                'hod'=>'required|string',
-                'email'=>'required|email |unique:departments',
-                'no_courses'=>'required|numeric',
-                'status'=>'required|string', 
-                'no_students'=>'required|numeric'
-            ]);
+        $department = Department::create([
+            'deptname' => $request['deptname'],
+            'hod' => $request['hod'],
+            'email' => $request['email'],
+            'no_courses' => $request['no_courses'],
+            'status' => $request['status'],
+            'no_students' => $request['no_students']
+        ]);
 
-            $department = Department::create([
-                'deptname' => $request['deptname'],
-                'hod' => $request['hod'],
-                'email' => $request['email'],
-                'no_courses' => $request['no_courses'],
-                'status' => $request['status'],
-                'no_students' => $request['no_students']
-            ]);
-
-            session()->flash('notify', 'Successfully registered department');
-            return redirect('/department');
-        }else{
-            return redirect('admin/index');
-        } 
+        session()->flash('notify', 'Successfully registered department');
+        return redirect('/department');
     }
 
     /**
@@ -82,16 +70,14 @@ class DepartmentController extends Controller
         //
     }
 
-    public function destroy(Request $request)
+    public function destroy(DepartmentRequest $request)
     {   
-        if(Auth::check()){
-           $deptid= $request->deptid;
-            $department = Department::where('deptid', '=', $deptid)->delete();
-            session()->flash('delete', 'Successfully Deleted');
-            return redirect('/department');
-        }else{
-            return redirect('admin/index');
-        }
+       
+        $deptid= $request->deptid;
+        $department = Department::where('deptid', '=', $deptid)->delete();
+        session()->flash('delete', 'Successfully Deleted');
+        return redirect('/department');
+       
         
     }
 }

@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-
         <div class="home">
             <div class="breadcrumbs_container">
                 <div class="container">
@@ -9,7 +8,7 @@
                             <div class="breadcrumbs">
                                 <ul>
                                     <li><a href="index.html">Home</a></li>
-                                    <li>About</li>
+                                    <li>Registeration</li>
                                 </ul>
                             </div>
                         </div>
@@ -68,95 +67,6 @@
             </div>
         </div>
 
-        <!-- Team -->
-        <div class="team">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="section_title_container text-center">
-                            <h2 class="section_title">The Best Tutors in Town</h2>
-                            <div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices fermentum congue, quam velit venenatis sem</p></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row team_row">
-                    
-                    <!-- Team Item -->
-                    <div class="col-lg-3 col-md-6 team_col">
-                        <div class="team_item">
-                            <div class="team_image"><img src="images/team_1.jpg" alt=""></div>
-                            <div class="team_body">
-                                <div class="team_title"><a href="#">Jacke Masito</a></div>
-                                <div class="team_subtitle">Marketing & Management</div>
-                                <div class="social_list">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Team Item -->
-                    <div class="col-lg-3 col-md-6 team_col">
-                        <div class="team_item">
-                            <div class="team_image"><img src="images/team_2.jpg" alt=""></div>
-                            <div class="team_body">
-                                <div class="team_title"><a href="#">William James</a></div>
-                                <div class="team_subtitle">Designer & Website</div>
-                                <div class="social_list">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Team Item -->
-                    <div class="col-lg-3 col-md-6 team_col">
-                        <div class="team_item">
-                            <div class="team_image"><img src="images/team_3.jpg" alt=""></div>
-                            <div class="team_body">
-                                <div class="team_title"><a href="#">John Tyler</a></div>
-                                <div class="team_subtitle">Quantum mechanics</div>
-                                <div class="social_list">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Team Item -->
-                    <div class="col-lg-3 col-md-6 team_col">
-                        <div class="team_item">
-                            <div class="team_image"><img src="images/team_4.jpg" alt=""></div>
-                            <div class="team_body">
-                                <div class="team_title"><a href="#">Veronica Vahn</a></div>
-                                <div class="team_subtitle">Math & Physics</div>
-                                <div class="social_list">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
         <!-- Counter -->
         <div class="counter">
             <div class="counter_background" style="background-image:url(images/counter_background.jpg)"></div>
@@ -204,18 +114,36 @@
                 <div class="counter_form">
                     <div class="row fill_height">
                         <div class="col fill_height">
-                            <form class="counter_form_content d-flex flex-column align-items-center justify-content-center" action="#">
-                                <div class="counter_form_title">courses now</div>
-                                <input type="text" class="counter_input" placeholder="Your Name:" required="required">
-                                <input type="tel" class="counter_input" placeholder="Phone:" required="required">
-                                <select name="counter_select" id="counter_select" class="counter_input counter_options">
-                                    <option>Choose Subject</option>
-                                    <option>Subject</option>
-                                    <option>Subject</option>
-                                    <option>Subject</option>
+                            <form class="counter_form_content d-flex flex-column align-items-center justify-content-center" novalidate="true" method=
+                            "POST"  autocomplete="off" @submit.prevent="registerUser">
+                                <div class="counter_form_title">Register Here</div>
+                                <input type="text" class="counter_input" name="fullname" v-model="register.fullname" v-validate="{required : true, regex: /^([A-Z a-z]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('fullname') }" placeholder="Fullnames" required>
+                                <span v-show="errors.has('fullname')" class="help is-danger">{{ errors.first('fullname') }}</span>
+                                
+                                <input type="text" class="counter_input" name="matric"  v-model="register.matric" v-validate="{required : true, regex: /^([0-9]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('matric') }" placeholder="Matriculation Number" required>
+                                <span v-show="errors.has('matric')" class="help is-danger">{{ errors.first('matric') }}</span>
+
+                                <input type="email" class="counter_input" name="email"  v-model="register.email"  v-validate="{required : true, min:3}" :class="{'input': true, 'is-danger': errors.has('email') }" placeholder="Email Adress" required>
+                                <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+
+                                <input type="text" class="counter_input" name="department"  v-model="register.department" v-validate="{required : true, regex: /^([A-Z a-z]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('department') }" placeholder="Department" required>
+                                <span v-show="errors.has('department')" class="help is-danger">{{ errors.first('department') }}</span>
+
+                                <select name="level" id="counter_select" class="counter_input counter_options" v-model="register.level" v-validate="{required : true, regex: /^([A-Z a-z 0-9]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('level') }">
+                                    <option>-Choose Level-</option>
+                                    <option value="100"> 100L </option>
+                                    <option value="200"> 200L</option>
+                                    <option value="300"> 300L </option>
+                                    <option value="400"> 400L</option>
+                                    <option value="500"> 500L</option>
+                                    <option value="Extra Year"> Extra Year</option>
                                 </select>
-                                <textarea class="counter_input counter_text_input" placeholder="Message:" required="required"></textarea>
-                                <button type="submit" class="counter_form_button">submit now</button>
+                                <span v-show="errors.has('level')" class="help is-danger">{{ errors.first('level') }}</span>
+
+                                <textarea class="counter_input counter_text_input" name="learn" placeholder="What are you look forward to learning ?" required v-model="register.learn" v-validate="{required : true, regex: /^([A-Z a-z]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('learn') }"></textarea>
+                                <span v-show="errors.has('learn')" class="help is-danger">{{ errors.first('learn') }}</span>
+                                <!-- <button type="submit" class="counter_form_button">submit now</button> -->
+                                <input type="submit" class="counter_form_button" value="Register">
                             </form>
                         </div>
                     </div>
@@ -223,14 +151,45 @@
 
             </div>
         </div>
-
     </div>
 </template>
 <script>
+
 export default {
-    mounted(){
-        console.log('register mode created');
+    data() {
+        return{
+            msg: false,
+            register:{
+                fullname: '',
+                email: '',
+                matric: '',
+                department: '',
+                level:'',
+                learn: ''
+            }
+        }
+    },
+    methods:{
+        registerUser(){
+            let module = this;
+            this.$validator.validateAll().then(result => {
+				if (result) {
+					axios.post('/registeration', this.register)
+					.then(response => {
+                        this.msg = response.data.success;
+                        this.$toaster.info(this.msg);
+						window.location = "/course";
+					})
+					.catch(error => {
+                        this.msg = error.response.data.fail;
+                        this.$toaster.warning('User already exist');
+                        window.location = "/registeration";
+					});
+				}
+			})  
+        }
     }
+    
 }
 </script>
 

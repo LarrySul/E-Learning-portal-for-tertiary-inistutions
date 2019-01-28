@@ -3,11 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>window.Laravel = { csrfToken: '{{ csrf_token() }}'}</script>
     <title>E-learning Classroom</title>
     <!-- Scripts -->
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <!-- Styles -->
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
@@ -15,7 +14,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/owl.carousel.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/owl.theme.default.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/modals.css') }}">
+    <!-- <link rel="stylesheet" href="{{asset('css/v-toaster.css')}}" > -->
+    <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/modals.css') }}"> -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main_styles.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/blog.css') }}">
@@ -24,20 +24,22 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/courses_responsive.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/about.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/about_responsive.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/v-toaster.css')}}">
 
 
 </head>
+<style>
+span{
+    color:red
+}
+</style>
 <body>
     <div id="app">
         @yield('content')
         @extends('layouts.footer')
     </div>
-    <script>
-		window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token()]); ?>
-    </script>
     
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/TweenMax.min.js') }}"></script>
@@ -50,5 +52,7 @@
     <script src="{{ asset('js/parallax.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/blog.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/v-toaster.js') }}"></script>
 </body>
 </html>

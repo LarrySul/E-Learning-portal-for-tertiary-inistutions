@@ -4,54 +4,40 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Auth\Validator;
+use Illuminate\Support\Facades\Auth;
+use Image;
 
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function home(){
+        return view('admin/home');
+    }
+
     public function index()
     {
-        // The user is logged in...
-        return view('user/home');
+        return view('admin/welcome');
     }
-
-    public function course()
-    {
-        return view('user/course');
-    }
-
-     public function blog()
-    {
-        return view('user/blog');
-    }
-    public function register()
-    {
-        return view('user/register');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() .'.'. $avatar ->getClientOriginalExtension();
+            Image::make($avatar)->resize(200, 200)->save(public_path('admin/upload/avatar/'. $filename));
+
+            $user = Auth::user();
+            $user->avatar = $filename;
+            $user->save();
+        }
+        return view('admin/home', array('user' => Auth::user()));
     }
 
     /**
