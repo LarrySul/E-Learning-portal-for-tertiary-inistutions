@@ -116,7 +116,7 @@
                         <div class="col fill_height">
                             <form class="counter_form_content d-flex flex-column align-items-center justify-content-center" novalidate="true" method=
                             "POST"  autocomplete="off" @submit.prevent="registerUser">
-                                <div class="counter_form_title">Register Here</div>
+                                <div class="counter_form_title mt-4">Register Here</div>
                                 <input type="text" class="counter_input" name="fullname" v-model="register.fullname" v-validate="{required : true, regex: /^([A-Z a-z]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('fullname') }" placeholder="Fullnames" required>
                                 <span v-show="errors.has('fullname')" class="help is-danger">{{ errors.first('fullname') }}</span>
                                 
@@ -130,7 +130,7 @@
                                 <span v-show="errors.has('department')" class="help is-danger">{{ errors.first('department') }}</span>
 
                                 <select name="level" id="counter_select" class="counter_input counter_options" v-model="register.level" v-validate="{required : true, regex: /^([A-Z a-z 0-9]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('level') }">
-                                    <option>-Choose Level-</option>
+                                    <option value="">-Choose Level-</option>
                                     <option value="100"> 100L </option>
                                     <option value="200"> 200L</option>
                                     <option value="300"> 300L </option>
@@ -143,7 +143,7 @@
                                 <textarea class="counter_input counter_text_input" name="learn" placeholder="What are you look forward to learning ?" required v-model="register.learn" v-validate="{required : true, regex: /^([A-Z a-z]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('learn') }"></textarea>
                                 <span v-show="errors.has('learn')" class="help is-danger">{{ errors.first('learn') }}</span>
                                 <!-- <button type="submit" class="counter_form_button">submit now</button> -->
-                                <input type="submit" class="counter_form_button" value="Register">
+                                <input type="submit" class="counter_form_button mb-2" value="Register">
                             </form>
                         </div>
                     </div>
@@ -154,7 +154,8 @@
     </div>
 </template>
 <script>
-
+import axios from 'axios'
+Vue.use(VToaster, {timeout: 7000})
 export default {
     data() {
         return{

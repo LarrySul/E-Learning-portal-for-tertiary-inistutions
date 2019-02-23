@@ -1,6 +1,4 @@
 
-require('./bootstrap');
-
 window.Vue = require('vue');
 
 // import Toaster from 'v-toaster'
@@ -19,8 +17,8 @@ Vue.use(VueRouter)
 
 Vue.use(axios)
 
-// Vue.use(Toaster, { timeout: 7000 })
 
+// Vue.use(Toaster, { timeout: 7000 })
 
 Vue.component('Home', require('./components/home.vue'));
 

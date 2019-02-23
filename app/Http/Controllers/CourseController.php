@@ -8,6 +8,7 @@ use Auth\Validator;
 use App\Http\Requests\CourseRequest;
 use Auth;
 use Session;
+use DB;
 
 class CourseController extends Controller
 {
@@ -41,6 +42,17 @@ class CourseController extends Controller
     {   
         $course = Course::all();
         return view('admin.course.all', ['course' => $course]);
+    }
+
+    public function showcourse(Course $course)
+    {   
+        $course = Course::all();
+        // DB::table('courses')
+        //                     ->leftJoin('lecturers', 'courses.lectid' ,  '=', 'lecturers.lectid')
+        //                     ->leftJoin('departments', 'courses.deptid' ,  '=', 'departments.deptid')
+        //                     ->get();
+        // print_r($course); die;
+        return response()->json(['course' => $course], 200);
     }
 
     public function edit(Course $course, $id)

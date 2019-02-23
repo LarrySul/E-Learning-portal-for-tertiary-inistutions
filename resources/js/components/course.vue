@@ -5,11 +5,18 @@
             <div class="breadcrumbs_container">
                 <div class="container">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-lg-6">
                             <div class="breadcrumbs">
                                 <ul >
                                     <li><a href="/">Home</a></li>
-                                    <li> You are logged in as </li>
+                                    <li> You are logged in as &nbsp; <span class="h6" style="color:#999">{{user[0].matric}}</span> </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="breadcrumbs">
+                                <ul >
+                                    <li class="pull-right mr-3"><a href="#">Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -27,12 +34,12 @@
                         <!-- <div class="courses_search_container"> -->
                             <form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
                                 <input type="search" class="courses_search_input" placeholder="Search Courses" required="required">
-                                <!-- <select id="courses_search_select" class="courses_search_select courses_search_input">
-                                    <option>All Categories</option>
-                                    <option>Category</option>
-                                    <option>Category</option>
-                                    <option>Category</option>
-                                </select> -->
+                                    <select id="courses_search_select" class="courses_search_select courses_search_input">
+                                        <option>All Categories</option>
+                                        <option>Category</option>
+                                        <option>Category</option>
+                                        <option>Category</option>
+                                    </select>
                                 <button action="submit" class="courses_search_button ml-auto">search now</button>
                             </form>
                         <!-- </div> -->
@@ -40,27 +47,27 @@
                             <div class="row courses_row">
                                 
                                 <!-- Course -->
-                                <div class="col-lg-6 course_col">
+                                <div class="col-lg-6 course_col" v-bind:key="t.id" v-for="t in tuts.course">
                                     <div class="course">
-                                        <div class="course_image"><img src="images/course_4.jpg" alt=""></div>
+                                        <div class="course_image"> <video src=""  :id="t.url"></video></div>
                                         <div class="course_body">
-                                            <h3 class="course_title"><a href="course.html">Software Training</a></h3>
-                                            <div class="course_teacher">Mr. John Taylor</div>
+                                            <h3 class="course_title"><a href="">{{t.csname}}</a></h3>
+                                            <div class="course_teacher">{{t.cscode}}</div>
                                             <div class="course_text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+                                                <p>{{t.description}}</p>
                                             </div>
                                         </div>
                                         <div class="course_footer">
                                             <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
                                                 <div class="course_info">
                                                     <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                                    <span>20 Student</span>
+                                                    <span>{{t.level}}</span>
                                                 </div>
                                                 <div class="course_info">
                                                     <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>5 Ratings</span>
+                                                    <span>{{t.updated_at}}</span>
                                                 </div>
-                                                <div class="course_price ml-auto">$130</div>
+                                                <div class="course_price ml-auto">{{t.status}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -132,24 +139,35 @@
         </div>
     </div>
 </template>
-
 <script>
+import axios from 'axios'
     export default {
         data(){
             return {
                 tuts: [],
-                user: []
+                user: [],
+                msg:false
             }
         },
-        created(){
-            axios.get('/user').then(response=>{
-                this.user = response.data
+        mounted(){ 
+            axios.get('/allcourse').then(response=>{
+                console.log(response);
+                // this.tuts = response.data;
             })
         },
-        mounted() {
-            axios.get('/').then(response=>{
-                this.tuts = response.data
+        created(){
+            axios.get('/loggedUser').then(response=>{
+                this.user = response.data;
             })
+        },
+        methods:{
+            logout(){
+                axios.post('/logout').then(response=>{
+                    this.$toaster.error(this.msg);
+                    window.location="/";
+                })
+            }
         }
+
     }
 </script>

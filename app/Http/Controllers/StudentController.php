@@ -6,8 +6,8 @@ use App\Student;
 use Illuminate\Http\Request;
 use Auth\Validator;
 use App\Http\Requests\StudentRequest;
-use DB;
 use Session;
+use DB;
 
 
 class StudentController extends Controller
@@ -22,10 +22,7 @@ class StudentController extends Controller
         return view('user/home');
     }
 
-    public function login(){
-        return view('user/login');
-    }
-
+   
     public function create(StudentRequest $request)
     {    
         $user = Student::create([
@@ -34,10 +31,10 @@ class StudentController extends Controller
         ]);
         
         if($user){
-           $student = session(['matric' => $user->matric]);
+           $student = $user['matric'];
             return response()->json([
               'success' => 'Yo! registeration succesful !',
-              'student' => $student
+              'student' => Session::get($student)
 		    ], 200);
         }else{
             return response()->json([
@@ -47,16 +44,17 @@ class StudentController extends Controller
     }
 
     public function signin(Request $request){
+        
         $result = Student::where([
             ['email', $request->email],
             ['matric', $request->matric]
         ])->first();
         
         if($result){
-           session(['matric' => $request->matric]);
+            $student = $result['matric'];
             return response()->json([
                 'success' => 'Login successful !',
-                
+                'student' => Session::get($student)
             ], 200);
         }else{
             return response()->json([
@@ -75,6 +73,20 @@ class StudentController extends Controller
         return view('user/course');
     }
 
+    public function loggedUser(Request $request, $student, $column=['matric'])
+    {
+        $student = Session::get('matric'); 
+		$user = DB::table('students')->where('matric', $student)->first();
+        return response()->json([$user], 200);
+    }
+
+    public function logout(Request $request)
+    {
+        Session::destroy(); 
+        return response()->json(['fail' => 'User Logged Out'], 200);
+    }
+
+
     /**
      * Display the specified resource.
      *
@@ -84,7 +96,7 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         $student = Student::all();
-        // return view('user/register');
+        return view('user/register');
     }
 
     public function blog(Student $student){
@@ -96,9 +108,9 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function login(Student $student)
     {
-        //
+        return view('user/login');
     }
 
     /**

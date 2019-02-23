@@ -18,10 +18,11 @@ Route::get('/', 'StudentController@index');
 Route::get('/course', 'StudentController@store');
 Route::get('/blog', 'StudentController@blog');
 Route::get('/registeration', 'StudentController@show');
-Route::get('/userlogin', 'StudentController@login');
-
 Route::post('/userlogin', 'StudentController@signin');
-Route::get('/user', 'StudentController@signin');
+Route::get('/loggedUser', 'StudentController@loggedUser');
+Route::get('/user', 'StudentController@login');
+Route::get('/allcourse', 'CourseController@showcourse');
+Route::post('/logout', 'StudentController@logout');
 
 // admin get routes
 Route::get('/home', 'UserController@home');

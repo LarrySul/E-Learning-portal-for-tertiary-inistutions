@@ -58,6 +58,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 Vue.use(VToaster, {timeout: 7000})
 export default {
     data() {
@@ -85,7 +86,7 @@ export default {
 					.catch(error => {
                         this.msg = error.response.data.fail;
                         this.$toaster.error(this.msg);
-                        window.location="/userlogin";
+                        window.location="/user";
 					});
 				}
 			})  
