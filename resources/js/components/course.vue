@@ -9,14 +9,17 @@
                             <div class="breadcrumbs">
                                 <ul >
                                     <li><a href="/">Home</a></li>
-                                    <li> You are logged in as &nbsp; <span class="h6" style="color:#999">{{user[0].matric}}</span> </li>
+                                    <li> You are logged in as &nbsp; <span class="h6" style="color:#000" >{{user.matric}}</span> </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="breadcrumbs">
                                 <ul >
-                                    <li class="pull-right mr-3"><a href="#">Logout</a></li>
+                                    <form action="" method="post" @submit.prevent="logout">
+                                       <li class="pull-right mr-3"><button type="submit" class="btn btn-default btn-sm">Logout</button></li> 
+                                    </form>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -33,7 +36,7 @@
                     <div class="col-lg-8">
                         <!-- <div class="courses_search_container"> -->
                             <form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
-                                <input type="search" class="courses_search_input" placeholder="Search Courses" required="required">
+                                <input type="search" class="courses_search_input" @keyup="searchTuts()" v-model="search" name="search" placeholder="Search Courses" required="required">
                                     <select id="courses_search_select" class="courses_search_select courses_search_input">
                                         <option>All Categories</option>
                                         <option>Category</option>
@@ -45,14 +48,17 @@
                         <!-- </div> -->
                         <div class="courses_container">
                             <div class="row courses_row">
-                                
                                 <!-- Course -->
                                 <div class="col-lg-6 course_col" v-bind:key="t.id" v-for="t in tuts.course">
                                     <div class="course">
-                                        <div class="course_image"> <video src=""  :id="t.url"></video></div>
+                                        <div class="course_image">
+                                            <video controls preload="none">
+                                                <source :src="t.url" type="video/mp4">
+                                            </video>
+                                        </div>
                                         <div class="course_body">
                                             <h3 class="course_title"><a href="">{{t.csname}}</a></h3>
-                                            <div class="course_teacher">{{t.cscode}}</div>
+                                            <div class="course_teacher">{{t.fullname}}</div>
                                             <div class="course_text">
                                                 <p>{{t.description}}</p>
                                             </div>
@@ -65,7 +71,7 @@
                                                 </div>
                                                 <div class="course_info">
                                                     <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>{{t.updated_at}}</span>
+                                                    <span>{{t.no_students}}</span>
                                                 </div>
                                                 <div class="course_price ml-auto">{{t.status}}</div>
                                             </div>
@@ -146,25 +152,42 @@ import axios from 'axios'
             return {
                 tuts: [],
                 user: [],
-                msg:false
+                searchResult:[],
+                msg: false,
+                search: '',
+                matric: ''
             }
         },
         mounted(){ 
-            axios.get('/allcourse').then(response=>{
-                console.log(response);
-                // this.tuts = response.data;
+            axios.get('allcourse').then(response=>{
+                this.tuts = response.data;
+            }, error =>{
+                console.error(error)
             })
         },
         created(){
             axios.get('/loggedUser').then(response=>{
-                this.user = response.data;
-            })
+                this.user = response.data[0];
+            }, error =>{
+                console.error(error)
+            }),
+            
+            this.searchTuts();
         },
         methods:{
             logout(){
-                axios.post('/logout').then(response=>{
-                    this.$toaster.error(this.msg);
+                axios.post('/logUser').then(response=>{
+                    this.$toaster.success(this.msg);
                     window.location="/";
+                }, error =>{
+                    console.error(error)
+                })
+            },
+            searchTuts(){
+               axios.get('/searchquery?search='+ this.search).then(response=>{
+                    this.searchResult = response.data
+                }, error =>{
+                    console.error(error)
                 })
             }
         }

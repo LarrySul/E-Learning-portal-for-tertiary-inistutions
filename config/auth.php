@@ -12,7 +12,6 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
-
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
@@ -42,8 +41,7 @@ return [
         ],
 
         'api' => [
-            // 'driver' => 'token',
-            'driver' => 'passport',
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
@@ -70,7 +68,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+        
+        'students' => [
+        'driver' => 'eloquent',
+        'model' => App\Student::class,
+        'table' => 'students',
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------

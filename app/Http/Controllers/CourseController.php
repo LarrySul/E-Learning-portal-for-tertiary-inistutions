@@ -46,12 +46,11 @@ class CourseController extends Controller
 
     public function showcourse(Course $course)
     {   
-        $course = Course::all();
-        // DB::table('courses')
-        //                     ->leftJoin('lecturers', 'courses.lectid' ,  '=', 'lecturers.lectid')
-        //                     ->leftJoin('departments', 'courses.deptid' ,  '=', 'departments.deptid')
-        //                     ->get();
-        // print_r($course); die;
+        $course =  DB::table('courses')
+                            ->leftJoin('departments', 'courses.deptid' ,  '=', 'departments.deptid')
+                            ->leftJoin('lecturers', 'courses.lectid' ,  '=', 'lecturers.id')
+                            ->get();
+        
         return response()->json(['course' => $course], 200);
     }
 
@@ -69,9 +68,10 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function search(Request $request)
     {
-        //
+        $search = $request->search;
+        return Course::where('csname','LIKE','%'.$search.'%')->get();
     }
 
     /**

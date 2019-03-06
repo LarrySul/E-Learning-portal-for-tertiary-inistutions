@@ -179,12 +179,12 @@ export default {
 					.then(response => {
                         this.msg = response.data.success;
                         this.$toaster.info(this.msg);
-						window.location = "/course";
+						// window.location = "/course";
 					})
 					.catch(error => {
                         this.msg = error.response.data.fail;
                         this.$toaster.warning('User already exist');
-                        window.location = "/registeration";
+                        // window.location = "/registeration";
 					});
 				}
 			})  

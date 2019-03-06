@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Student;
 use Illuminate\Http\Request;
 use Auth\Validator;
-use App\Http\Requests\StudentRequest;
+use App\Http\Request\StudentRequest;
 use Session;
 use DB;
-
+use JWTAuthException;
+use JWTAuth;
 
 class StudentController extends Controller
 {
@@ -17,50 +18,57 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         return view('user/home');
     }
 
    
-    public function create(StudentRequest $request)
+    public function create(Request $request)
     {    
         $user = Student::create([
             'fullname' => $request['fullname'], 'email' => $request['email'], 'matric' => $request['matric'],
             'department' => $request['department'],'level' => $request['level'], 'learn' => $request['learn']
         ]);
-        
-        if($user){
-           $student = $user['matric'];
-            return response()->json([
-              'success' => 'Yo! registeration succesful !',
-              'student' => Session::get($student)
-		    ], 200);
-        }else{
-            return response()->json([
-                'fail' => 'Registeration failed'
-            ], 401);
-        } 
+
+        $token = JWTAUTH::fromUser($user);
+        print_r($token); die;
+        // if($user){
+        //     // session(['matric' => $request->matric]);
+        //     return response()->json([
+        //       'success' => 'Yo! registeration succesful !',
+        //       'student' => $user
+		//     ], 200);
+        // }else{
+        //     return response()->json([
+        //         'fail' => 'Registeration failed'
+        //     ], 401);
+        // } 
     }
 
     public function signin(Request $request){
         
-        $result = Student::where([
-            ['email', $request->email],
-            ['matric', $request->matric]
-        ])->first();
         
-        if($result){
-            $student = $result['matric'];
-            return response()->json([
-                'success' => 'Login successful !',
-                'student' => Session::get($student)
-            ], 200);
-        }else{
-            return response()->json([
-                'fail' => 'Invalid credentials'
-            ], 401);
-        }
+        $credentials = $request->only('email','matric');
+        $token = JWTAuth::attempt($credentials);
+
+		if($token) {
+            $users  = Student::where([
+                    ['email', $request->email],
+                    ['matric', $request->matric]
+                    
+                ])->first();
+                session(['matric' => $request->matric]);
+                return response()->json([
+                    'success' => 'Login successful !',
+                    'student' => $user
+                ], 200);
+		   		}else{
+                    return response()->json([
+                        'fail' => 'Invalid credentials'
+                    ], 401);
+			 } 
     }
     /**
      * Store a newly created resource in storage.
@@ -73,17 +81,20 @@ class StudentController extends Controller
         return view('user/course');
     }
 
-    public function loggedUser(Request $request, $student, $column=['matric'])
+    public function loggedUser(Request $request, $matric, $column=['matric'])
     {
-        $student = Session::get('matric'); 
-		$user = DB::table('students')->where('matric', $student)->first();
+        $matric = Session::get('matric'); 
+        $user = DB::table('students')->where('matric', $matric)->first();
         return response()->json([$user], 200);
     }
 
-    public function logout(Request $request)
-    {
-        Session::destroy(); 
-        return response()->json(['fail' => 'User Logged Out'], 200);
+    public function logUser(Request $request)
+    {   
+        JWTAuth::invalidate();
+        return response([
+                'status' => 'success',
+                'msg' => 'Logged out Successfully.'
+            ], 200);
     }
 
 

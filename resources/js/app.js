@@ -1,23 +1,27 @@
 
+
 window.Vue = require('vue');
 
-// import Toaster from 'v-toaster'
+Vue.config.productionTip = false
+
+import axios from 'axios'
+
+import VueAxios from 'vue-axios'
 
 import VueRouter from 'vue-router'
 
 import Router from './router.js'
 
-import axios from 'axios'
 
 import VeeValidate from 'vee-validate'
+
+Vue.use(VueAxios, axios)
 
 Vue.use(VeeValidate)
 
 Vue.use(VueRouter)
 
-Vue.use(axios)
-
-
+axios.defaults.baseURL = 'http://localhost:8000/';
 // Vue.use(Toaster, { timeout: 7000 })
 
 Vue.component('Home', require('./components/home.vue'));

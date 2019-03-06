@@ -33,6 +33,8 @@ span{
 </style>
 <body>
     <div id="app">
+        
+        @extends('layouts.header')
         @yield('content')
         @extends('layouts.footer')
     </div>

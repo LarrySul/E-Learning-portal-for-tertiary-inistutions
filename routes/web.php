@@ -21,8 +21,9 @@ Route::get('/registeration', 'StudentController@show');
 Route::post('/userlogin', 'StudentController@signin');
 Route::get('/loggedUser', 'StudentController@loggedUser');
 Route::get('/user', 'StudentController@login');
-Route::get('/allcourse', 'CourseController@showcourse');
-Route::post('/logout', 'StudentController@logout');
+Route::get('allcourse', 'CourseController@showcourse');
+Route::get('/searchquery', 'CourseController@search');
+Route::post('/logUser', 'StudentController@logUser');
 
 // admin get routes
 Route::get('/home', 'UserController@home');

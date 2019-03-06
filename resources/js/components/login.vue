@@ -34,7 +34,7 @@
 
                     <!-- About Item -->
                     <div class="col-lg-4 text-center">
-                        <form method="POST" @submit.prevent="loginUser" autocomplete="off">
+                        <form method="POST" @submit.prevent="loginUser" autocomplete="on">
                             <div class="form-group">
                                 <input type="email" name="email" class="form-control"  placeholder="Email Address" v-model="login.email"  v-validate="{required : true, min:3}" :class="{'input': true, 'is-danger': errors.has('email') }">
                                 <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
@@ -79,14 +79,16 @@ export default {
 				if (result) {
 					axios.post('/userlogin', this.login)
 					.then(response => {
+                        let token = response.data.token;
+                        localStorage.setItem('token', token);
                         this.msg = response.data.success;
                         this.$toaster.info(this.msg);
-                        window.location="/course";
+                        // window.location="/course";
 					})
 					.catch(error => {
                         this.msg = error.response.data.fail;
                         this.$toaster.error(this.msg);
-                        window.location="/user";
+                        // window.location="/user";
 					});
 				}
 			})  
