@@ -10,28 +10,16 @@ Vue.use(VueAxios, axios)
 
 Vue.use(VueRouter)
 
- const router = new VueRouter({
-   routes: [
-    //  {
-    //    path: "/",
-    //    component: Home
-    //  },
-    //  {
-    //    path: "/course",
-    //    component: Course
-    //  },
-    //  {
-    //    path: "/blog",
-    //    component: Blog
-    //  },
-    //  {
-    //   path: "/register",
-    //   component: Register
-    // }
 
-   ],
+const routes = [
+   {path : '/course',  name: 'Course', meta:{requiresAuth: true}},
+   {path : '/',  name: 'Home'}
+]
 
-   mode: "history"
- });
+const router = new VueRouter({
+   mode: "history",
+   routes
+});
+
 
 export default router

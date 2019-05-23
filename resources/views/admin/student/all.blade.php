@@ -2,6 +2,11 @@
 @include('layouts.admin.sidebar')
 @include('layouts.admin.header')
 @section('content')
+<style>
+img{
+    max-width: 60%;
+}
+</style>
 <div class="all-content-wrapper">
     <div class="header-advance-area">
         <div class="breadcome-area">
@@ -36,25 +41,31 @@
     <div class="contacts-area mg-b-15">
         <div class="container-fluid">
             <div class="row">
+            @foreach($student as $key => $data)
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="student-inner-std res-mg-b-30">
                         <div class="student-img">
-                            <img src="{{asset('admin/img/student/1.jpg')}}" alt="" />
+                            <img src="{{asset('admin/img/student/1.jpg')}}" class="img-circle" alt="" />
                         </div>
                         <div class="student-dtl">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <h2>Alexam Angles</h2>
+                                <div class="col-md-12">
+                                    <h5 class="text-left">Fullnames: {{$data->firstname}} {{$data->lastname}}</h5> 
                                 </div>
-                                <div class="col-md-6">
-                                    <span> <a href="#"><i class="fa fa-edit fa-2x"></i></a></span>
+                                <div class="col-md-12">
+                                    <h5 class="text-left">Department : {{$data->department}}</h5> 
+                                </div>
+                                <div class="col-md-12">
+                                    <h5 class="text-left">Matric Number :</b> {{$data->matric}}</h5> 
+                                </div>
+                                <div class="col-md-12">
+                                    <h5 class="text-left">Email :</b> {{$data->email}}</h5> 
                                 </div>
                             </div>
-                            <p class="dp">Computer Science</p>
-                            <p class="dp-ag"><b>Age:</b> 20 Years</p>
                         </div>
                     </div>
                 </div>
+            @endforeach
             </div>
         </div>
     </div> 

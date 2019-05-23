@@ -14,9 +14,7 @@
                             <ul class="main_nav">
                                 <li class="active"><a href="/">Home</a></li>
                                 <li><a href="/registeration">Register</a></li>
-                                <li><a href="/user">Login</a></li>
-                                <li><a href="/course">Courses</a></li>
-                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/userlogin">Login</a></li>
                                 <li><a href="/admin/index">Admin</a></li>
                             </ul>
                             <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>

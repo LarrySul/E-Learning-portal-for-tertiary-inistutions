@@ -18,15 +18,17 @@ class User extends Authenticatable implements JWTsubject
      */
 
 
-     public function getJWTIdentifier(){
+    public function getJWTIdentifier(){
         return $this->getKey();
-     }
+    }
 
-     public function getJWTCustomClaims(){
+    public function getJWTCustomClaims(){
         return [];
-     }
+    }
+
+
     protected $fillable = [
-        'name', 'userid', 'utype', 'email', 'password',
+        'username', 'lastname', 'firstname', 'email','matric', 'department', 'level', 'learn','password',  
     ];
 
     /**

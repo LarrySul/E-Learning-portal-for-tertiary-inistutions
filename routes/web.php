@@ -14,36 +14,44 @@
 
 Auth::routes();
 
-Route::get('/', 'StudentController@index');
-Route::get('/course', 'StudentController@store');
-Route::get('/blog', 'StudentController@blog');
-Route::get('/registeration', 'StudentController@show');
-Route::post('/userlogin', 'StudentController@signin');
-Route::get('/loggedUser', 'StudentController@loggedUser');
-Route::get('/user', 'StudentController@login');
-Route::get('allcourse', 'CourseController@showcourse');
-Route::get('/searchquery', 'CourseController@search');
-Route::post('/logUser', 'StudentController@logUser');
+    Route::get('/', 'StudentController@homepage');
+    Route::get('/registeration', 'StudentController@show');
+    Route::get('/userlogin', 'StudentController@login');
+    Route::get('/course', 'UserController@course');
+    Route::post('/upload', 'UserController@store');
 
-// admin get routes
-Route::get('/home', 'UserController@home');
-Route::get('/admin/index', 'UserController@index');
-Route::get('/professor', 'LecturerController@index');
-Route::get('/addprofessor', 'LecturerController@create');
-Route::get('/profile&{id}', 'LecturerController@edit');
-Route::get('/admincourse', 'CourseController@show');
-Route::get('/addcourse', 'CourseController@create');
-Route::get('/courseinfo&{id}', 'CourseController@edit');
-Route::get('/student', 'StudentController@index');
-Route::get('/addstudent', 'StudentController@addstudent');
-Route::get('/department', 'DepartmentController@show');
-Route::post('/upload', 'UserController@store');
-Route::post('/addprofessor', 'LecturerController@store');
-Route::post('/addcourse', 'CourseController@store');
-Route::post('/department', 'DepartmentController@store');
-Route::delete('/delete', 'DepartmentController@destroy');
+    // admin get routes
+    Route::get('/home', 'UserController@home');
+    Route::get('/admin/index', 'UserController@index');
+
+    Route::get('/student', 'UserController@index');
+    Route::get('/addstudent', 'StudentController@addstudent');
 
 
-// from front end
-Route::post('/registeration','StudentController@create');
+    Route::group(['middleware' => ['auth']], function(){
+        Route::get('/department', 'DepartmentController@show');
+        Route::post('/department', 'DepartmentController@store');
+        Route::delete('/delete', 'DepartmentController@destroy');
+    });
+
+    Route::group(['middleware' => ['auth']], function(){
+        Route::get('/admincourse', 'CourseController@show');
+        Route::get('/addcourse', 'CourseController@create');
+        Route::post('/addcourse', 'CourseController@store');
+    });
+
+    Route::group(['middleware' => ['auth']], function(){
+        
+        Route::get('/professor', 'LecturerController@index');
+        Route::get('/professoradd', 'LecturerController@create');
+        Route::get('/profile&{id}', 'LecturerController@edit');
+        Route::post('/addprofessor', 'LecturerController@store');
+    });
+
+    
+
+
+
+
+
 

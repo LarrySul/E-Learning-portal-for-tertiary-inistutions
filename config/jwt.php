@@ -21,9 +21,9 @@ return [
     |
     */
 
-    'secret' => env('JWT_SECRET', 'h3kDsgnYMnsCaIPHBkzGtxWnTOThxPKg'),
+    'secret' => env('JWT_SECRET', 'YKMwgoP2PbkExoQ9HmNLWzHpermLHW13'),
 
-    /*
+    /* 
     |--------------------------------------------------------------------------
     | JWT time to live
     |--------------------------------------------------------------------------
@@ -145,7 +145,7 @@ return [
         |
         */
 
-        'jwt' => 'Tymon\JWTAuth\Providers\JWT\NamshiAdapter',
+        'jwt' => 'Tymon\JWTAuth\Providers\JWT\Namshi',
         
 
 
@@ -158,7 +158,7 @@ return [
         |
         */
 
-        'auth' => 'Tymon\JWTAuth\Providers\Auth\IlluminateAuthAdapter',
+        'auth' => 'Tymon\JWTAuth\Providers\Auth\Illuminate',
         
 
         /*
@@ -170,7 +170,7 @@ return [
         |
         */
 
-        'storage' => 'Tymon\JWTAuth\Providers\Storage\IlluminateCacheAdapter',
+        'storage' => 'Tymon\JWTAuth\Providers\Storage\Illuminate',
         
 
     ],

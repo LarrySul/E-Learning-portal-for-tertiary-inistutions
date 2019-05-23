@@ -28,10 +28,6 @@
                                         <ul class="nav navbar-nav mai-top-nav">
                                             <li class="nav-item dropdown res-dis-nn">
                                                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">Project <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span></a>
-                                                <div role="menu" class="dropdown-menu animated zoomIn">
-                                                
-                                                    <a href="#" class="dropdown-item">Documentation</a>
-                                                </div>
                                             </li>
                                         </ul>
                                     </div>

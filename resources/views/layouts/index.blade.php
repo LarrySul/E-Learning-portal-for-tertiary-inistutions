@@ -23,13 +23,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/about.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/about_responsive.css')}}">
     <link rel="stylesheet" href="{{ asset('css/v-toaster.css')}}">
-
-
 </head>
 <style>
-span{
-    color:red
-}
+    span{
+        color:red
+    }
 </style>
 <body>
     <div id="app">
@@ -54,5 +52,13 @@ span{
     <script src="{{ asset('js/blog.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/v-toaster.js') }}"></script>
+    <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    </script>
+    
 </body>
 </html>

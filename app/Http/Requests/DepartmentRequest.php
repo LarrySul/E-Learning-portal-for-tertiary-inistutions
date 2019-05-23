@@ -24,7 +24,7 @@ class DepartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'deptname'=>'required|numeric|max:2',
+            'deptname'=>'required|string|min:2',
             'hod'=>'required|string',
             'email'=>'required|email |unique:departments',
             'no_courses'=>'required|numeric',

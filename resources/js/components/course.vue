@@ -9,15 +9,16 @@
                             <div class="breadcrumbs">
                                 <ul >
                                     <li><a href="/">Home</a></li>
-                                    <li> You are logged in as &nbsp; <span class="h6" style="color:#000" >{{user.matric}}</span> </li>
+                                    <li> You are logged in as &nbsp; <span class="h6" style="color:#000" ></span> <b style="text-transform:uppercase">{{user.firstname}}</b></li>
                                 </ul>
                             </div>
                         </div>
+                        
                         <div class="col-lg-6">
                             <div class="breadcrumbs">
                                 <ul >
                                     <form action="" method="post" @submit.prevent="logout">
-                                       <li class="pull-right mr-3"><button type="submit" class="btn btn-default btn-sm">Logout</button></li> 
+                                       <li class="pull-right mr-3"><button type="submit" class="btn btn-danger btn-sm">Logout</button></li> 
                                     </form>
                                     
                                 </ul>
@@ -37,11 +38,9 @@
                         <!-- <div class="courses_search_container"> -->
                             <form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
                                 <input type="search" class="courses_search_input" @keyup="searchTuts()" v-model="search" name="search" placeholder="Search Courses" required="required">
-                                    <select id="courses_search_select" class="courses_search_select courses_search_input">
+                                    <select id="courses_search_select" class="courses_search_select courses_search_input" >
                                         <option>All Categories</option>
-                                        <option>Category</option>
-                                        <option>Category</option>
-                                        <option>Category</option>
+                                        <option v-bind:key="d.id" v-for="d in dept">{{d.deptname}}</option>
                                     </select>
                                 <button action="submit" class="courses_search_button ml-auto">search now</button>
                             </form>
@@ -50,24 +49,26 @@
                             <div class="row courses_row">
                                 <!-- Course -->
                                 <div class="col-lg-6 course_col" v-bind:key="t.id" v-for="t in tuts.course">
+                                    
                                     <div class="course">
                                         <div class="course_image">
                                             <video controls preload="none">
-                                                <source :src="t.url" type="video/mp4">
+                                                <source type="video/mp4" :src="'https://www.youtube.com/watch?' + t.url">
                                             </video>
                                         </div>
                                         <div class="course_body">
                                             <h3 class="course_title"><a href="">{{t.csname}}</a></h3>
-                                            <div class="course_teacher">{{t.fullname}}</div>
-                                            <div class="course_text">
-                                                <p>{{t.description}}</p>
-                                            </div>
+                                            <div class="course_teacher"><h5>Course Code</h5>{{t.cscode}}</div>
+                                            <div class="course_teacher"><h5>Lecturer</h5> {{t.fullname}}</div>
+                                            <div class="course_teacher"><h5>YouTube Resource</h5></div>
+                                            <div class="course_teacher"><a :href="'https://www.youtube.com/watch?' + t.url" target="tab">{{t.url}}</a> </div>
+
                                         </div>
                                         <div class="course_footer">
                                             <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
                                                 <div class="course_info">
                                                     <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                                    <span>{{t.level}}</span>
+                                                    <span>{{t.level}}L</span>
                                                 </div>
                                                 <div class="course_info">
                                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -113,31 +114,14 @@
                             <!-- Categories -->
                             <div class="sidebar_section">
                                 <div class="sidebar_section_title">Categories</div>
-                                <div class="sidebar_categories">
+                                <div class="sidebar_categories" v-bind:key="d.id" v-for="d in dept">
                                     <ul>
-                                        <li><a href="#">Art & Design</a></li>
-                                        <li><a href="#">Business</a></li>
-                                        <li><a href="#">Programming</a></li>
+                                        <li><a href="#">{{d.deptname}}</a></li>
                                     </ul>
                                 </div>
                             </div>
 
-                            <!-- Latest Course -->
-                            <div class="sidebar_section">
-                                <div class="sidebar_section_title">Latest Courses</div>
-                                <div class="sidebar_latest">
-
-                                    <!-- Latest Course -->
-                                    <div class="latest d-flex flex-row align-items-start justify-content-start">
-                                        <div class="latest_image"><div><img src="images/latest_3.jpg" alt=""></div></div>
-                                        <div class="latest_content">
-                                            <div class="latest_title"><a href="course.html">The Secrets of Body Language</a></div>
-                                            <div class="latest_price">$220</div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -147,27 +131,40 @@
 </template>
 <script>
 import axios from 'axios'
+
+
     export default {
         data(){
             return {
                 tuts: [],
                 user: [],
+                dept: [],
                 searchResult:[],
                 msg: false,
                 search: '',
-                matric: ''
+                firstname: ''
             }
         },
-        mounted(){ 
-            axios.get('allcourse').then(response=>{
+        created(){ 
+            let token = localStorage.getItem('token', token);
+            axios.get('/allcourse?token=' + token).then(response=>{
                 this.tuts = response.data;
+            }, error =>{
+                console.error(error)
+            });
+        },
+        beforeMount(){
+            let token = localStorage.getItem('token');
+            axios.get('/departmentList?token=' + token).then(response=>{
+                this.dept = response.data.result;
             }, error =>{
                 console.error(error)
             })
         },
-        created(){
-            axios.get('/loggedUser').then(response=>{
-                this.user = response.data[0];
+        mounted(){
+            let token = localStorage.getItem('token');
+            axios.get('/loggedUser?token=' + token).then(response=>{
+                this.user = response.data.result;
             }, error =>{
                 console.error(error)
             }),
@@ -176,18 +173,24 @@ import axios from 'axios'
         },
         methods:{
             logout(){
-                axios.post('/logUser').then(response=>{
+                let token = localStorage.getItem('token');
+                axios.post('/logout?token=' + token).then(response=>{
+                    localStorage.removeItem('token', token);
+                    this.msg = response.data.success;
                     this.$toaster.success(this.msg);
                     window.location="/";
-                }, error =>{
-                    console.error(error)
+                }).catch(error =>{
+                    this.$toaster.error(error);
+                    window.location="/";
                 })
             },
             searchTuts(){
-               axios.get('/searchquery?search='+ this.search).then(response=>{
-                    this.searchResult = response.data
-                }, error =>{
-                    console.error(error)
+                let token = localStorage.getItem('token');
+                axios.get('/searchquery?search'+ this.search + token).then(response=>{
+                        this.searchResult = response.data.search;
+                        console.log(his.searchResult)
+                    }, error =>{
+                        console.error(error)
                 })
             }
         }

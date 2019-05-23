@@ -117,15 +117,15 @@
                             <form class="counter_form_content d-flex flex-column align-items-center justify-content-center" novalidate="true" method=
                             "POST"  autocomplete="off" @submit.prevent="registerUser">
                                 <div class="counter_form_title mt-4">Register Here</div>
-                                <input type="text" class="counter_input" name="fullname" v-model="register.fullname" v-validate="{required : true, regex: /^([A-Z a-z]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('fullname') }" placeholder="Fullnames" required>
-                                <span v-show="errors.has('fullname')" class="help is-danger">{{ errors.first('fullname') }}</span>
+                                <input type="text" class="counter_input" name="firstname" v-model="register.firstname" v-validate="{required : true, regex: /^([A-Z a-z]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('firstname') }" placeholder="firstname" required>
+                                <span v-show="errors.has('firstname')" class="help is-danger">{{ errors.first('firstname') }}</span>
+
+                                <input type="text" class="counter_input" name="lastname" v-model="register.lastname" v-validate="{required : true, regex: /^([A-Z a-z]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('lastname') }" placeholder="lastname" required>
+                                <span v-show="errors.has('lastname')" class="help is-danger">{{ errors.first('lastname') }}</span>
                                 
                                 <input type="text" class="counter_input" name="matric"  v-model="register.matric" v-validate="{required : true, regex: /^([0-9]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('matric') }" placeholder="Matriculation Number" required>
                                 <span v-show="errors.has('matric')" class="help is-danger">{{ errors.first('matric') }}</span>
-
-                                <input type="email" class="counter_input" name="email"  v-model="register.email"  v-validate="{required : true, min:3}" :class="{'input': true, 'is-danger': errors.has('email') }" placeholder="Email Adress" required>
-                                <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
-
+                          
                                 <input type="text" class="counter_input" name="department"  v-model="register.department" v-validate="{required : true, regex: /^([A-Z a-z]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('department') }" placeholder="Department" required>
                                 <span v-show="errors.has('department')" class="help is-danger">{{ errors.first('department') }}</span>
 
@@ -140,9 +140,13 @@
                                 </select>
                                 <span v-show="errors.has('level')" class="help is-danger">{{ errors.first('level') }}</span>
 
-                                <textarea class="counter_input counter_text_input" name="learn" placeholder="What are you look forward to learning ?" required v-model="register.learn" v-validate="{required : true, regex: /^([A-Z a-z]+)$/, min:3}" :class="{'input': true, 'is-danger': errors.has('learn') }"></textarea>
-                                <span v-show="errors.has('learn')" class="help is-danger">{{ errors.first('learn') }}</span>
-                                <!-- <button type="submit" class="counter_form_button">submit now</button> -->
+                                <input type="email" class="counter_input" name="email"  v-model="register.email"  v-validate="{required : true, min:3}" :class="{'input': true, 'is-danger': errors.has('email') }" placeholder="Email Adress" required>
+                                <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+                                
+                                <input type="password" class="counter_input" name="password"  v-model="register.password"  v-validate="{required : true, min:3}" :class="{'input': true, 'is-danger': errors.has('password') }" placeholder="Password" required>
+                                <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
+
+                                
                                 <input type="submit" class="counter_form_button mb-2" value="Register">
                             </form>
                         </div>
@@ -161,12 +165,13 @@ export default {
         return{
             msg: false,
             register:{
-                fullname: '',
+                firstname: '',
+                lastname: '',
                 email: '',
                 matric: '',
                 department: '',
                 level:'',
-                learn: ''
+                password: ''
             }
         }
     },
@@ -175,16 +180,19 @@ export default {
             let module = this;
             this.$validator.validateAll().then(result => {
 				if (result) {
-					axios.post('/registeration', this.register)
+					axios.post('/register', this.register)
 					.then(response => {
+                        let token = response.data.access_token;
+                        localStorage.setItem('token', token);
                         this.msg = response.data.success;
                         this.$toaster.info(this.msg);
-						// window.location = "/course";
+                        this.$router.push('course');
 					})
 					.catch(error => {
                         this.msg = error.response.data.fail;
-                        this.$toaster.warning('User already exist');
-                        // window.location = "/registeration";
+                        this.$toaster.warning('Error in registeration');
+                        this.$router.push('/');
+                        
 					});
 				}
 			})  

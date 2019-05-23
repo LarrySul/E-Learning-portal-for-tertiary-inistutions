@@ -2,6 +2,14 @@
 @include('layouts.admin.sidebar')
 @include('layouts.admin.header')
 @section('content')
+<style>
+.close{
+    color: #fff;
+}
+.alert-danger{
+    color:red;
+}
+</style>
 <div class="all-content-wrapper">
     <div class="header-advance-area">
         <div class="breadcome-area">
@@ -73,7 +81,6 @@
                                     <th>Email</th>
                                     <th>Registered courses</th>
                                     <th>No. of Students</th>
-                                    <th>Setting</th>
                                 </tr>
                                 @foreach($department as $key => $data)
                                 <tr>
@@ -86,10 +93,6 @@
                                     <td>{{$data->email}}</td>
                                     <td>{{$data->no_courses}}</td>
                                     <td>{{$data->no_students}}</td>
-                                    <td>
-                                    <a data-toggle="modal" data-target="#Modal2_{{$data->deptid}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                    <a data-toggle="modal" data-target="#Modal3_{{$data->deptid}}"><button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
-                                    </td>
                                 </tr>
                                 @endforeach
                             </table>
@@ -153,86 +156,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- i need to condition this place if records arent inserted -->
-                    <div id="Modal2_{{$data->deptid}}" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header header-color-modal bg-color-1">
-                                    <h4 class="modal-title">Edit Department</h4>
-                                    <div class="modal-close-area modal-close-df">
-                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                    </div>
-                                </div>
-                                <div class="modal-body">
-                                    <form  action="#" method="POST">
-                                    @csrf
-                                    <div class="row">
-                                        @csrf
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <input name="deptname" type="text" class="form-control" value="{{$data->deptname}}" placeholder="Department Name" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input name="hod" type="text" class="form-control" value="{{$data->hod}}" placeholder="Head of Department" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input name="email" type="email" class="form-control" value="{{$data->email}}" placeholder="Email" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <input name="no_courses" type="number" class="form-control" value="{{$data->no_courses}}" placeholder="Course offered" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input name="no_students" type="number" class="form-control" value="{{$data->no_students}}" placeholder="No. of Students" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <select name="status" class="form-control">
-                                                        <option value="{{$data->status}}">{{$data->status}}</option>
-                                                        <option value="Inactive">Inactive</option>
-                                                        <option value="Active">Active</option>
-                                                    </select> 
-                                                </div>
-                                            </div>
-                                        </div>   
-                                        <div class="modal-footer">
-                                            <button data-dismiss="modal" class="btn btn-danger">Cancel</button>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- and also -->
-                    <div id="Modal3_{{$data->deptid}}" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-close-area modal-close-df">
-                                    <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                </div>
-                                <form action="/delete" method="POST">
-                                    <div class="modal-body">
-                                    
-                                        <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
-                                        <h2>Danger!</h2>
-                                        {{method_field('delete')}}
-                                        @csrf
-                                        <input type="hidden" name="deptid" value="{{$data->deptid}}">
-                                        <p>You are about to delete this record...</p>
-                                    </div>
-                                    <div class="modal-footer danger-md">
-                                        <button type="button" class="btn btn-md btn-danger" data-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-md btn-danger">Confirm Delete</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    
                 </div>
             </div>
         </div>

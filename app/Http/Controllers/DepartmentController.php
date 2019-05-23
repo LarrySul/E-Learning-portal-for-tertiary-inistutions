@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Department;
-use App\Http\Requests\CourseRequest;
+use App\Http\Requests\DepartmentRequest;
 use Illuminate\Http\Request;
 use Auth\Validator;
 use Auth;
@@ -12,14 +12,10 @@ class DepartmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
     
-    public function create()
-    {
-        return view('admin/department/all');  
-    }
-
+ 
     public function store(DepartmentRequest $request)
     {
         $department = Department::create([
@@ -47,28 +43,21 @@ class DepartmentController extends Controller
         return view('admin.department.all', ['department'=> $departments]);
     }
 
+    public function list(Department $department)
+    {
+        $departments = Department::all();
+        return response()->json([
+            'result' => $departments
+        ],200);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function edit(Department $department)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Department  $department
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Department $department)
-    {
-        //
-    }
+   
 
     public function destroy(DepartmentRequest $request)
     {   

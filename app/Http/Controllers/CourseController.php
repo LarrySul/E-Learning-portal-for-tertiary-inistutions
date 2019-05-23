@@ -14,7 +14,7 @@ class CourseController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function create()
@@ -22,6 +22,7 @@ class CourseController extends Controller
         return view('admin.course.add');
     }
 
+   
     public function store(CourseRequest $request)
     {   
         $course = Course::create([
@@ -54,12 +55,6 @@ class CourseController extends Controller
         return response()->json(['course' => $course], 200);
     }
 
-    public function edit(Course $course, $id)
-    {   
-        $course = Course::find($id);
-        return view('admin/course/info',['course' => $course]);
-        
-    }
 
     /**
      * Update the specified resource in storage.
@@ -71,7 +66,8 @@ class CourseController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        return Course::where('csname','LIKE','%'.$search.'%')->get();
+        $searchQuery = Course::where('cscode','LIKE','%'.$search.'%')->get();
+        return response()->json(['search' => $searchQuery], 200);
     }
 
     /**

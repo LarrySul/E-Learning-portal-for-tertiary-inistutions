@@ -13,11 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware'=>'auth'], function () {
-    // Route::get('/allcourse', 'CourseController@showcourse');
+
+Route::get('/searchquery', 'CourseController@search');
+Route::group(['middleware' => ['jwt.verify']], function(){
+    Route::get('/loggedUser', 'UserController@currentLoggedin');
+    Route::post('/logout', 'UserController@logout');
+    Route::get('/allcourse', 'CourseController@showcourse');
+    Route::get('/departmentList', 'DepartmentController@list');
+    
 });
 
-// Route::middleware('auth:api')->get('/admincourse', function (Request $request) {
-//     return $request->course();
-// });
+Route::group(['middleware' => 'jwt.refresh'], function(){
+    Route::get('/refresh', 'UserController@refresh');
+});
 
+Route::post('/register', 'UserController@create');
+Route::post('/userlogin', 'UserController@signin');

@@ -2,16 +2,18 @@
 
 window.Vue = require('vue');
 
-Vue.config.productionTip = false
+// Vue.config.productionTip = false
 
-import axios from 'axios'
+require('./bootstrap');
 
-import VueAxios from 'vue-axios'
+
+import axios from 'axios';
+
+import VueAxios from 'vue-axios';
 
 import VueRouter from 'vue-router'
 
 import Router from './router.js'
-
 
 import VeeValidate from 'vee-validate'
 
@@ -21,22 +23,38 @@ Vue.use(VeeValidate)
 
 Vue.use(VueRouter)
 
-axios.defaults.baseURL = 'http://localhost:8000/';
-// Vue.use(Toaster, { timeout: 7000 })
+Vue.use(VToaster, {timeout: 7000})
+
+
+axios.defaults.baseURL = 'http://localhost:8000/api';
+
 
 Vue.component('Home', require('./components/home.vue'));
 
 Vue.component('Course', require('./components/course.vue'));
-
-Vue.component('Blog', require('./components/blog.vue'));
 
 Vue.component('Register', require('./components/register.vue'));
 
 Vue.component('Login', require('./components/login.vue'));
 
 
+Router.beforeEach((to, from, next)=>{
+    if(to.meta.requiresAuth){
+       const authUser = window.localStorage.getItem('token');
+       if(authUser){
+          next()
+        }else {
+            next(
+                window.location = '/'
+            )
+        }
+    }
+    next()
+})
+
+
 const app = new Vue({
     el: '#app',
-    router: Router
+    router: Router,
     
 });
